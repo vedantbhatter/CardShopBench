@@ -1,0 +1,3550 @@
+{
+  "run_id": 45282574457,
+  "commit": "c92f0f37b529cc49ddd01f5b4ab63c52e6374cb8",
+  "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+  "models": [
+    {
+      "model": "openai/gpt-6.2-astra",
+      "provider": "OpenAI",
+      "episodes": [
+        {
+          "seed": 11,
+          "status": "incomplete",
+          "error": "HTTPError: HTTP Error 429: Too Many Requests",
+          "last_day": 7,
+          "summary": {
+            "final_equity_cents": 95691,
+            "profit_cents": -4309,
+            "cash_cents": 33652,
+            "receivables_cents": 10689,
+            "liquidation_cents": 40753,
+            "realized_profit_cents": 2960,
+            "units_bought": 10,
+            "units_sold": 5,
+            "sell_through": 0.5,
+            "max_drawdown": 0.0962,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 0.87026,
+          "successful_responses": 42,
+          "budget_accounting_usd": 1.1281968000000002
+        },
+        {
+          "seed": 22,
+          "status": "incomplete",
+          "error": "HTTPError: HTTP Error 429: Too Many Requests",
+          "last_day": 0,
+          "summary": {
+            "final_equity_cents": 100000,
+            "profit_cents": 0,
+            "cash_cents": 100000,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 0,
+            "units_bought": 0,
+            "units_sold": 0,
+            "sell_through": 0.0,
+            "max_drawdown": 0,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 0,
+          "successful_responses": 0,
+          "budget_accounting_usd": 0.19687360000000004
+        }
+      ]
+    },
+    {
+      "model": "anthropic/claude-opus-5.5",
+      "provider": "Claude Platform on AWS",
+      "episodes": [
+        {
+          "seed": 11,
+          "status": "completed",
+          "error": null,
+          "last_day": 14,
+          "summary": {
+            "final_equity_cents": 109035,
+            "profit_cents": 9035,
+            "cash_cents": 109035,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 9035,
+            "units_bought": 9,
+            "units_sold": 9,
+            "sell_through": 1.0,
+            "max_drawdown": 0.06432,
+            "invalid_actions": 7
+          },
+          "reported_api_cost_usd": 0.8153320000000001,
+          "successful_responses": 57,
+          "budget_accounting_usd": 0.8153319999999998
+        },
+        {
+          "seed": 22,
+          "status": "completed",
+          "error": null,
+          "last_day": 14,
+          "summary": {
+            "final_equity_cents": 113971,
+            "profit_cents": 13971,
+            "cash_cents": 113971,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 13971,
+            "units_bought": 9,
+            "units_sold": 9,
+            "sell_through": 1.0,
+            "max_drawdown": 0.14058,
+            "invalid_actions": 6
+          },
+          "reported_api_cost_usd": 0.974736,
+          "successful_responses": 61,
+          "budget_accounting_usd": 0.9747359999999999
+        }
+      ]
+    },
+    {
+      "model": "google/gemini-4-neon",
+      "provider": "Google",
+      "episodes": [
+        {
+          "seed": 11,
+          "status": "completed",
+          "error": null,
+          "last_day": 14,
+          "summary": {
+            "final_equity_cents": 110272,
+            "profit_cents": 10272,
+            "cash_cents": 105808,
+            "receivables_cents": 0,
+            "liquidation_cents": 4464,
+            "realized_profit_cents": 11036,
+            "units_bought": 13,
+            "units_sold": 12,
+            "sell_through": 0.9230769230769231,
+            "max_drawdown": 0.08499,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 1.203378,
+          "successful_responses": 72,
+          "budget_accounting_usd": 1.2033780000000003
+        },
+        {
+          "seed": 22,
+          "status": "completed",
+          "error": null,
+          "last_day": 14,
+          "summary": {
+            "final_equity_cents": 111576,
+            "profit_cents": 11576,
+            "cash_cents": 63263,
+            "receivables_cents": 32670,
+            "liquidation_cents": 15643,
+            "realized_profit_cents": 14569,
+            "units_bought": 12,
+            "units_sold": 10,
+            "sell_through": 0.8333333333333334,
+            "max_drawdown": 0.14059,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 1.255557,
+          "successful_responses": 76,
+          "budget_accounting_usd": 1.2555569999999994
+        }
+      ]
+    },
+    {
+      "model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Relace",
+      "episodes": [
+        {
+          "seed": 11,
+          "status": "incomplete",
+          "error": "HTTPError: HTTP Error 429: Too Many Requests",
+          "last_day": 3,
+          "summary": {
+            "final_equity_cents": 96290,
+            "profit_cents": -3710,
+            "cash_cents": 30728,
+            "receivables_cents": 11167,
+            "liquidation_cents": 19203,
+            "realized_profit_cents": 495,
+            "units_bought": 6,
+            "units_sold": 1,
+            "sell_through": 0.16666666666666666,
+            "max_drawdown": 0.04714,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 0.0385940399,
+          "successful_responses": 20,
+          "budget_accounting_usd": 0.07841356437000002
+        },
+        {
+          "seed": 22,
+          "status": "incomplete",
+          "error": "HTTPError: HTTP Error 429: Too Many Requests",
+          "last_day": 0,
+          "summary": {
+            "final_equity_cents": 100000,
+            "profit_cents": 0,
+            "cash_cents": 100000,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 0,
+            "units_bought": 0,
+            "units_sold": 0,
+            "sell_through": 0.0,
+            "max_drawdown": 0,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 0,
+          "successful_responses": 0,
+          "budget_accounting_usd": 0.038357515239999994
+        }
+      ]
+    },
+    {
+      "model": "qwen/qwen3.8-27b",
+      "provider": "Darkbloom",
+      "episodes": [
+        {
+          "seed": 11,
+          "status": "completed",
+          "error": null,
+          "last_day": 14,
+          "summary": {
+            "final_equity_cents": 109873,
+            "profit_cents": 9873,
+            "cash_cents": 109873,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 9873,
+            "units_bought": 8,
+            "units_sold": 8,
+            "sell_through": 1.0,
+            "max_drawdown": 0.10095,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 0.1245443,
+          "successful_responses": 62,
+          "budget_accounting_usd": 0.12454430000000002
+        },
+        {
+          "seed": 22,
+          "status": "completed",
+          "error": null,
+          "last_day": 14,
+          "summary": {
+            "final_equity_cents": 112376,
+            "profit_cents": 12376,
+            "cash_cents": 112376,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 12376,
+            "units_bought": 7,
+            "units_sold": 7,
+            "sell_through": 1.0,
+            "max_drawdown": 0.12464,
+            "invalid_actions": 1
+          },
+          "reported_api_cost_usd": 0.12807926,
+          "successful_responses": 72,
+          "budget_accounting_usd": 0.12807925999999997
+        }
+      ]
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "provider": "Near AI",
+      "episodes": [
+        {
+          "seed": 11,
+          "status": "incomplete",
+          "error": "HTTPError: HTTP Error 429: Too Many Requests",
+          "last_day": 0,
+          "summary": {
+            "final_equity_cents": 100000,
+            "profit_cents": 0,
+            "cash_cents": 100000,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 0,
+            "units_bought": 0,
+            "units_sold": 0,
+            "sell_through": 0.0,
+            "max_drawdown": 0,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 9.789e-05,
+          "successful_responses": 4,
+          "budget_accounting_usd": 0.0013766399999999997
+        },
+        {
+          "seed": 22,
+          "status": "incomplete",
+          "error": "HTTPError: HTTP Error 429: Too Many Requests",
+          "last_day": 0,
+          "summary": {
+            "final_equity_cents": 100000,
+            "profit_cents": 0,
+            "cash_cents": 100000,
+            "receivables_cents": 0,
+            "liquidation_cents": 0,
+            "realized_profit_cents": 0,
+            "units_bought": 0,
+            "units_sold": 0,
+            "sell_through": 0.0,
+            "max_drawdown": 0,
+            "invalid_actions": 0
+          },
+          "reported_api_cost_usd": 0,
+          "successful_responses": 0,
+          "budget_accounting_usd": 0.0012304599999999998
+        }
+      ]
+    }
+  ],
+  "matched_controls": [
+    {
+      "agent": "cash",
+      "agent_type": "baseline",
+      "status": "completed",
+      "error": null,
+      "config": {
+        "days": 14,
+        "initial_cents": 100000,
+        "fee_bps": 1325,
+        "shipping_cents": 450,
+        "inbound_cents": 100,
+        "delivery_days": 2,
+        "settlement_days": 2,
+        "max_actions": 6,
+        "regime": "base",
+        "scenario": "mixed",
+        "seed": 11,
+        "research": true
+      },
+      "summary": {
+        "final_equity_cents": 100000,
+        "profit_cents": 0,
+        "cash_cents": 100000,
+        "receivables_cents": 0,
+        "liquidation_cents": 0,
+        "realized_profit_cents": 0,
+        "units_bought": 0,
+        "units_sold": 0,
+        "sell_through": 0.0,
+        "max_drawdown": 0,
+        "invalid_actions": 0
+      },
+      "history": [
+        {
+          "day": 0,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 1,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 2,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 3,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 4,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 5,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 6,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 7,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 8,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 9,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 10,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 11,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 12,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 13,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 14,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        }
+      ],
+      "events": [
+        {
+          "day": 1,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 1
+          }
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 2
+          }
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 3
+          }
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 4
+          }
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 5
+          }
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 6
+          }
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 7
+          }
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 8
+          }
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 9
+          }
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 10
+          }
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 11
+          }
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 12
+          }
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 13
+          }
+        },
+        {
+          "day": 14,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 14
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0
+      },
+      "model_transcript": [],
+      "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+      "evidence_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "agent": "margin",
+      "agent_type": "baseline",
+      "status": "completed",
+      "error": null,
+      "config": {
+        "days": 14,
+        "initial_cents": 100000,
+        "fee_bps": 1325,
+        "shipping_cents": 450,
+        "inbound_cents": 100,
+        "delivery_days": 2,
+        "settlement_days": 2,
+        "max_actions": 6,
+        "regime": "base",
+        "scenario": "mixed",
+        "seed": 11,
+        "research": true
+      },
+      "summary": {
+        "final_equity_cents": 101443,
+        "profit_cents": 1443,
+        "cash_cents": 96681,
+        "receivables_cents": 0,
+        "liquidation_cents": 4762,
+        "realized_profit_cents": 2111,
+        "units_bought": 2,
+        "units_sold": 1,
+        "sell_through": 0.5,
+        "max_drawdown": 0.01362,
+        "invalid_actions": 0
+      },
+      "history": [
+        {
+          "day": 0,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 1,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 2,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 3,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 4,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 5,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 6,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 7,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 8,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 9,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 10,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 11,
+          "cash_cents": 87782,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 10856,
+          "equity_cents": 98638,
+          "units_owned": 1
+        },
+        {
+          "day": 12,
+          "cash_cents": 87782,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 10860,
+          "equity_cents": 98642,
+          "units_owned": 1
+        },
+        {
+          "day": 13,
+          "cash_cents": 87782,
+          "receivable_cents": 14329,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 102111,
+          "units_owned": 0
+        },
+        {
+          "day": 14,
+          "cash_cents": 96681,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 4762,
+          "equity_cents": 101443,
+          "units_owned": 1
+        }
+      ],
+      "events": [
+        {
+          "day": 1,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 1
+          }
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 2
+          }
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 3
+          }
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 4
+          }
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 5
+          }
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 6
+          }
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 7
+          }
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 8
+          }
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 9
+          }
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 10
+          }
+        },
+        {
+          "day": 10,
+          "kind": "purchase",
+          "item_id": "d10-s7",
+          "card_id": "246700-Holofoil",
+          "cost_cents": 12218,
+          "purchased_day": 10,
+          "arrival_day": 12,
+          "price_cents": null,
+          "cash_cents": 87782
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d10-s7"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d10-s7",
+            "card_id": "246700-Holofoil",
+            "cost_cents": 12218,
+            "purchased_day": 10,
+            "arrival_day": 12,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 11
+          }
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 12
+          }
+        },
+        {
+          "day": 12,
+          "kind": "listing",
+          "item_id": "d10-s7",
+          "price_cents": 17036
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d10-s7",
+              "price_cents": 17036
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d10-s7"
+          }
+        },
+        {
+          "day": 12,
+          "kind": "sale",
+          "item_id": "d10-s7",
+          "card_id": "246700-Holofoil",
+          "gross_cents": 17036,
+          "net_cents": 14329,
+          "profit_cents": 2111
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 13
+          }
+        },
+        {
+          "day": 13,
+          "kind": "purchase",
+          "item_id": "d13-s1",
+          "card_id": "246722-Holofoil",
+          "cost_cents": 5430,
+          "purchased_day": 13,
+          "arrival_day": 15,
+          "price_cents": null,
+          "cash_cents": 82352
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d13-s1"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d13-s1",
+            "card_id": "246722-Holofoil",
+            "cost_cents": 5430,
+            "purchased_day": 13,
+            "arrival_day": 15,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 14,
+          "kind": "settlement",
+          "settles_day": 14,
+          "cents": 14329
+        },
+        {
+          "day": 14,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 14
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0
+      },
+      "model_transcript": [],
+      "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+      "evidence_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "agent": "momentum",
+      "agent_type": "baseline",
+      "status": "completed",
+      "error": null,
+      "config": {
+        "days": 14,
+        "initial_cents": 100000,
+        "fee_bps": 1325,
+        "shipping_cents": 450,
+        "inbound_cents": 100,
+        "delivery_days": 2,
+        "settlement_days": 2,
+        "max_actions": 6,
+        "regime": "base",
+        "scenario": "mixed",
+        "seed": 11,
+        "research": true
+      },
+      "summary": {
+        "final_equity_cents": 100000,
+        "profit_cents": 0,
+        "cash_cents": 100000,
+        "receivables_cents": 0,
+        "liquidation_cents": 0,
+        "realized_profit_cents": 0,
+        "units_bought": 0,
+        "units_sold": 0,
+        "sell_through": 0.0,
+        "max_drawdown": 0,
+        "invalid_actions": 0
+      },
+      "history": [
+        {
+          "day": 0,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 1,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 2,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 3,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 4,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 5,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 6,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 7,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 8,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 9,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 10,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 11,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 12,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 13,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 14,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        }
+      ],
+      "events": [
+        {
+          "day": 1,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 1
+          }
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 2
+          }
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 3
+          }
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 4
+          }
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 5
+          }
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 6
+          }
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 7
+          }
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 8
+          }
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 9
+          }
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 10
+          }
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 11
+          }
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 12
+          }
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 13
+          }
+        },
+        {
+          "day": 14,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 14
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0
+      },
+      "model_transcript": [],
+      "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+      "evidence_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "agent": "cash",
+      "agent_type": "baseline",
+      "status": "completed",
+      "error": null,
+      "config": {
+        "days": 14,
+        "initial_cents": 100000,
+        "fee_bps": 1325,
+        "shipping_cents": 450,
+        "inbound_cents": 100,
+        "delivery_days": 2,
+        "settlement_days": 2,
+        "max_actions": 6,
+        "regime": "base",
+        "scenario": "mixed",
+        "seed": 22,
+        "research": true
+      },
+      "summary": {
+        "final_equity_cents": 100000,
+        "profit_cents": 0,
+        "cash_cents": 100000,
+        "receivables_cents": 0,
+        "liquidation_cents": 0,
+        "realized_profit_cents": 0,
+        "units_bought": 0,
+        "units_sold": 0,
+        "sell_through": 0.0,
+        "max_drawdown": 0,
+        "invalid_actions": 0
+      },
+      "history": [
+        {
+          "day": 0,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 1,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 2,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 3,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 4,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 5,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 6,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 7,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 8,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 9,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 10,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 11,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 12,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 13,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 14,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        }
+      ],
+      "events": [
+        {
+          "day": 1,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 1
+          }
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 2
+          }
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 3
+          }
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 4
+          }
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 5
+          }
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 6
+          }
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 7
+          }
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 8
+          }
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 9
+          }
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 10
+          }
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 11
+          }
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 12
+          }
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 13
+          }
+        },
+        {
+          "day": 14,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "Cash-only control."
+          },
+          "result": {
+            "day": 14
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0
+      },
+      "model_transcript": [],
+      "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+      "evidence_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "agent": "margin",
+      "agent_type": "baseline",
+      "status": "completed",
+      "error": null,
+      "config": {
+        "days": 14,
+        "initial_cents": 100000,
+        "fee_bps": 1325,
+        "shipping_cents": 450,
+        "inbound_cents": 100,
+        "delivery_days": 2,
+        "settlement_days": 2,
+        "max_actions": 6,
+        "regime": "base",
+        "scenario": "mixed",
+        "seed": 22,
+        "research": true
+      },
+      "summary": {
+        "final_equity_cents": 101997,
+        "profit_cents": 1997,
+        "cash_cents": 65748,
+        "receivables_cents": 0,
+        "liquidation_cents": 36249,
+        "realized_profit_cents": 6458,
+        "units_bought": 4,
+        "units_sold": 2,
+        "sell_through": 0.5,
+        "max_drawdown": 0.036491592669563575,
+        "invalid_actions": 0
+      },
+      "history": [
+        {
+          "day": 0,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 1,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 2,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 3,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 4,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 5,
+          "cash_cents": 73986,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 24000,
+          "equity_cents": 97986,
+          "units_owned": 1
+        },
+        {
+          "day": 6,
+          "cash_cents": 62305,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 34353,
+          "equity_cents": 96658,
+          "units_owned": 3
+        },
+        {
+          "day": 7,
+          "cash_cents": 62305,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 34376,
+          "equity_cents": 96681,
+          "units_owned": 3
+        },
+        {
+          "day": 8,
+          "cash_cents": 62305,
+          "receivable_cents": 31523,
+          "inventory_liquidation_cents": 10370,
+          "equity_cents": 104198,
+          "units_owned": 2
+        },
+        {
+          "day": 9,
+          "cash_cents": 93828,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 10387,
+          "equity_cents": 104215,
+          "units_owned": 2
+        },
+        {
+          "day": 10,
+          "cash_cents": 93828,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 10400,
+          "equity_cents": 104228,
+          "units_owned": 2
+        },
+        {
+          "day": 11,
+          "cash_cents": 93828,
+          "receivable_cents": 6349,
+          "inventory_liquidation_cents": 5659,
+          "equity_cents": 105836,
+          "units_owned": 1
+        },
+        {
+          "day": 12,
+          "cash_cents": 100177,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 5670,
+          "equity_cents": 105847,
+          "units_owned": 1
+        },
+        {
+          "day": 13,
+          "cash_cents": 100177,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 5683,
+          "equity_cents": 105860,
+          "units_owned": 1
+        },
+        {
+          "day": 14,
+          "cash_cents": 65748,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 36249,
+          "equity_cents": 101997,
+          "units_owned": 2
+        }
+      ],
+      "events": [
+        {
+          "day": 1,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 1
+          }
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 2
+          }
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 3
+          }
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 4
+          }
+        },
+        {
+          "day": 4,
+          "kind": "purchase",
+          "item_id": "d4-s5",
+          "card_id": "246719-Holofoil",
+          "cost_cents": 26014,
+          "purchased_day": 4,
+          "arrival_day": 6,
+          "price_cents": null,
+          "cash_cents": 73986
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d4-s5"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d4-s5",
+            "card_id": "246719-Holofoil",
+            "cost_cents": 26014,
+            "purchased_day": 4,
+            "arrival_day": 6,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 5
+          }
+        },
+        {
+          "day": 5,
+          "kind": "purchase",
+          "item_id": "d5-s2",
+          "card_id": "246722-Holofoil",
+          "cost_cents": 5400,
+          "purchased_day": 5,
+          "arrival_day": 7,
+          "price_cents": null,
+          "cash_cents": 68586
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d5-s2"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d5-s2",
+            "card_id": "246722-Holofoil",
+            "cost_cents": 5400,
+            "purchased_day": 5,
+            "arrival_day": 7,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 5,
+          "kind": "purchase",
+          "item_id": "d5-s7",
+          "card_id": "590006-Holofoil",
+          "cost_cents": 6281,
+          "purchased_day": 5,
+          "arrival_day": 7,
+          "price_cents": null,
+          "cash_cents": 62305
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d5-s7"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d5-s7",
+            "card_id": "590006-Holofoil",
+            "cost_cents": 6281,
+            "purchased_day": 5,
+            "arrival_day": 7,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 6
+          }
+        },
+        {
+          "day": 6,
+          "kind": "listing",
+          "item_id": "d4-s5",
+          "price_cents": 36841
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d4-s5",
+              "price_cents": 36841
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d4-s5"
+          }
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 7
+          }
+        },
+        {
+          "day": 7,
+          "kind": "listing",
+          "item_id": "d4-s5",
+          "price_cents": 36856
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d4-s5",
+              "price_cents": 36856
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d4-s5"
+          }
+        },
+        {
+          "day": 7,
+          "kind": "listing",
+          "item_id": "d5-s2",
+          "price_cents": 7827
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s2",
+              "price_cents": 7827
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s2"
+          }
+        },
+        {
+          "day": 7,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9130
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9130
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 7,
+          "kind": "sale",
+          "item_id": "d4-s5",
+          "card_id": "246719-Holofoil",
+          "gross_cents": 36856,
+          "net_cents": 31523,
+          "profit_cents": 5509
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 8
+          }
+        },
+        {
+          "day": 8,
+          "kind": "listing",
+          "item_id": "d5-s2",
+          "price_cents": 7830
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s2",
+              "price_cents": 7830
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s2"
+          }
+        },
+        {
+          "day": 8,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9147
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9147
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 9,
+          "kind": "settlement",
+          "settles_day": 9,
+          "cents": 31523
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 9
+          }
+        },
+        {
+          "day": 9,
+          "kind": "listing",
+          "item_id": "d5-s2",
+          "price_cents": 7834
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s2",
+              "price_cents": 7834
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s2"
+          }
+        },
+        {
+          "day": 9,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9165
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9165
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 10
+          }
+        },
+        {
+          "day": 10,
+          "kind": "listing",
+          "item_id": "d5-s2",
+          "price_cents": 7837
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s2",
+              "price_cents": 7837
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s2"
+          }
+        },
+        {
+          "day": 10,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9184
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9184
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 10,
+          "kind": "sale",
+          "item_id": "d5-s2",
+          "card_id": "246722-Holofoil",
+          "gross_cents": 7837,
+          "net_cents": 6349,
+          "profit_cents": 949
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 11
+          }
+        },
+        {
+          "day": 11,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9201
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9201
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 12,
+          "kind": "settlement",
+          "settles_day": 12,
+          "cents": 6349
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 12
+          }
+        },
+        {
+          "day": 12,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9219
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9219
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 13
+          }
+        },
+        {
+          "day": 13,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 9237
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 9237
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 13,
+          "kind": "purchase",
+          "item_id": "d13-s0",
+          "card_id": "246758-Holofoil",
+          "cost_cents": 34429,
+          "purchased_day": 13,
+          "arrival_day": 15,
+          "price_cents": null,
+          "cash_cents": 65748
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d13-s0"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d13-s0",
+            "card_id": "246758-Holofoil",
+            "cost_cents": 34429,
+            "purchased_day": 13,
+            "arrival_day": 15,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 14,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 14
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0
+      },
+      "model_transcript": [],
+      "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+      "evidence_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "agent": "momentum",
+      "agent_type": "baseline",
+      "status": "completed",
+      "error": null,
+      "config": {
+        "days": 14,
+        "initial_cents": 100000,
+        "fee_bps": 1325,
+        "shipping_cents": 450,
+        "inbound_cents": 100,
+        "delivery_days": 2,
+        "settlement_days": 2,
+        "max_actions": 6,
+        "regime": "base",
+        "scenario": "mixed",
+        "seed": 22,
+        "research": true
+      },
+      "summary": {
+        "final_equity_cents": 98302,
+        "profit_cents": -1698,
+        "cash_cents": 82659,
+        "receivables_cents": 0,
+        "liquidation_cents": 15643,
+        "realized_profit_cents": 1295,
+        "units_bought": 4,
+        "units_sold": 2,
+        "sell_through": 0.5,
+        "max_drawdown": 0.04793,
+        "invalid_actions": 0
+      },
+      "history": [
+        {
+          "day": 0,
+          "cash_cents": 100000,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 0,
+          "equity_cents": 100000,
+          "units_owned": 0
+        },
+        {
+          "day": 1,
+          "cash_cents": 86732,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 9685,
+          "equity_cents": 96417,
+          "units_owned": 1
+        },
+        {
+          "day": 2,
+          "cash_cents": 86732,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 9705,
+          "equity_cents": 96437,
+          "units_owned": 1
+        },
+        {
+          "day": 3,
+          "cash_cents": 86732,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 9725,
+          "equity_cents": 96457,
+          "units_owned": 1
+        },
+        {
+          "day": 4,
+          "cash_cents": 86732,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 9745,
+          "equity_cents": 96477,
+          "units_owned": 1
+        },
+        {
+          "day": 5,
+          "cash_cents": 86732,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 9766,
+          "equity_cents": 96498,
+          "units_owned": 1
+        },
+        {
+          "day": 6,
+          "cash_cents": 80451,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 15385,
+          "equity_cents": 95836,
+          "units_owned": 2
+        },
+        {
+          "day": 7,
+          "cash_cents": 78325,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 16882,
+          "equity_cents": 95207,
+          "units_owned": 3
+        },
+        {
+          "day": 8,
+          "cash_cents": 78325,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 16916,
+          "equity_cents": 95241,
+          "units_owned": 3
+        },
+        {
+          "day": 9,
+          "cash_cents": 78325,
+          "receivable_cents": 2312,
+          "inventory_liquidation_cents": 15482,
+          "equity_cents": 96119,
+          "units_owned": 2
+        },
+        {
+          "day": 10,
+          "cash_cents": 80637,
+          "receivable_cents": 14377,
+          "inventory_liquidation_cents": 5647,
+          "equity_cents": 100661,
+          "units_owned": 1
+        },
+        {
+          "day": 11,
+          "cash_cents": 82659,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 15546,
+          "equity_cents": 98205,
+          "units_owned": 2
+        },
+        {
+          "day": 12,
+          "cash_cents": 82659,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 15577,
+          "equity_cents": 98236,
+          "units_owned": 2
+        },
+        {
+          "day": 13,
+          "cash_cents": 82659,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 15610,
+          "equity_cents": 98269,
+          "units_owned": 2
+        },
+        {
+          "day": 14,
+          "cash_cents": 82659,
+          "receivable_cents": 0,
+          "inventory_liquidation_cents": 15643,
+          "equity_cents": 98302,
+          "units_owned": 2
+        }
+      ],
+      "events": [
+        {
+          "day": 0,
+          "kind": "purchase",
+          "item_id": "d0-s5",
+          "card_id": "589985-Holofoil",
+          "cost_cents": 13268,
+          "purchased_day": 0,
+          "arrival_day": 2,
+          "price_cents": null,
+          "cash_cents": 86732
+        },
+        {
+          "day": 0,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d0-s5"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d0-s5",
+            "card_id": "589985-Holofoil",
+            "cost_cents": 13268,
+            "purchased_day": 0,
+            "arrival_day": 2,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 1,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 1
+          }
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 2
+          }
+        },
+        {
+          "day": 2,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 16857
+        },
+        {
+          "day": 2,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 16857
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 3
+          }
+        },
+        {
+          "day": 3,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 16890
+        },
+        {
+          "day": 3,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 16890
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 4
+          }
+        },
+        {
+          "day": 4,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 16924
+        },
+        {
+          "day": 4,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 16924
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 5
+          }
+        },
+        {
+          "day": 5,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 16957
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 16957
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 5,
+          "kind": "purchase",
+          "item_id": "d5-s7",
+          "card_id": "590006-Holofoil",
+          "cost_cents": 6281,
+          "purchased_day": 5,
+          "arrival_day": 7,
+          "price_cents": null,
+          "cash_cents": 80451
+        },
+        {
+          "day": 5,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d5-s7"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d5-s7",
+            "card_id": "590006-Holofoil",
+            "cost_cents": 6281,
+            "purchased_day": 5,
+            "arrival_day": 7,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 6
+          }
+        },
+        {
+          "day": 6,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 16992
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 16992
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 6,
+          "kind": "purchase",
+          "item_id": "d6-s0",
+          "card_id": "589967-Holofoil",
+          "cost_cents": 2126,
+          "purchased_day": 6,
+          "arrival_day": 8,
+          "price_cents": null,
+          "cash_cents": 78325
+        },
+        {
+          "day": 6,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d6-s0"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d6-s0",
+            "card_id": "589967-Holofoil",
+            "cost_cents": 2126,
+            "purchased_day": 6,
+            "arrival_day": 8,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 7
+          }
+        },
+        {
+          "day": 7,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 17025
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 17025
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 7,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10061
+        },
+        {
+          "day": 7,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10061
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 8
+          }
+        },
+        {
+          "day": 8,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 17059
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 17059
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 8,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10081
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10081
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 8,
+          "kind": "listing",
+          "item_id": "d6-s0",
+          "price_cents": 3184
+        },
+        {
+          "day": 8,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d6-s0",
+              "price_cents": 3184
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d6-s0"
+          }
+        },
+        {
+          "day": 8,
+          "kind": "sale",
+          "item_id": "d6-s0",
+          "card_id": "589967-Holofoil",
+          "gross_cents": 3184,
+          "net_cents": 2312,
+          "profit_cents": 186
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 9
+          }
+        },
+        {
+          "day": 9,
+          "kind": "listing",
+          "item_id": "d0-s5",
+          "price_cents": 17092
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d0-s5",
+              "price_cents": 17092
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d0-s5"
+          }
+        },
+        {
+          "day": 9,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10100
+        },
+        {
+          "day": 9,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10100
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 9,
+          "kind": "sale",
+          "item_id": "d0-s5",
+          "card_id": "589985-Holofoil",
+          "gross_cents": 17092,
+          "net_cents": 14377,
+          "profit_cents": 1109
+        },
+        {
+          "day": 10,
+          "kind": "settlement",
+          "settles_day": 10,
+          "cents": 2312
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 10
+          }
+        },
+        {
+          "day": 10,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10121
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10121
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 10,
+          "kind": "purchase",
+          "item_id": "d10-s1",
+          "card_id": "589985-Holofoil",
+          "cost_cents": 12355,
+          "purchased_day": 10,
+          "arrival_day": 12,
+          "price_cents": null,
+          "cash_cents": 68282
+        },
+        {
+          "day": 10,
+          "kind": "tool",
+          "action": {
+            "tool": "buy",
+            "args": {
+              "listing_id": "d10-s1"
+            },
+            "rationale": "Expected margin clears threshold and cash reserve."
+          },
+          "result": {
+            "item_id": "d10-s1",
+            "card_id": "589985-Holofoil",
+            "cost_cents": 12355,
+            "purchased_day": 10,
+            "arrival_day": 12,
+            "price_cents": null
+          }
+        },
+        {
+          "day": 11,
+          "kind": "settlement",
+          "settles_day": 11,
+          "cents": 14377
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 11
+          }
+        },
+        {
+          "day": 11,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10140
+        },
+        {
+          "day": 11,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10140
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 12
+          }
+        },
+        {
+          "day": 12,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10160
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10160
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 12,
+          "kind": "listing",
+          "item_id": "d10-s1",
+          "price_cents": 17193
+        },
+        {
+          "day": 12,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d10-s1",
+              "price_cents": 17193
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d10-s1"
+          }
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 13
+          }
+        },
+        {
+          "day": 13,
+          "kind": "listing",
+          "item_id": "d5-s7",
+          "price_cents": 10180
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d5-s7",
+              "price_cents": 10180
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d5-s7"
+          }
+        },
+        {
+          "day": 13,
+          "kind": "listing",
+          "item_id": "d10-s1",
+          "price_cents": 17226
+        },
+        {
+          "day": 13,
+          "kind": "tool",
+          "action": {
+            "tool": "list_item",
+            "args": {
+              "item_id": "d10-s1",
+              "price_cents": 17226
+            },
+            "rationale": "Reprice against the current scenario reference."
+          },
+          "result": {
+            "listed": "d10-s1"
+          }
+        },
+        {
+          "day": 14,
+          "kind": "tool",
+          "action": {
+            "tool": "end_day",
+            "args": {},
+            "rationale": "No eligible action at current prices."
+          },
+          "result": {
+            "day": 14
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost_usd": 0
+      },
+      "model_transcript": [],
+      "snapshot_sha256": "bdfdb1151083815e35d236a3e11f78f3029aec9c0283645e35f085492b45fc7a",
+      "evidence_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ],
+  "reported_api_cost_usd": 5.4105784899,
+  "manifest": [
+    {
+      "path": "pilot-model-0/0-11.json",
+      "sha256": "5570c187cce12009e0f61b59127c09a948951e1d279a44576dd483e35a3d5250"
+    },
+    {
+      "path": "pilot-model-0/0-22.json",
+      "sha256": "4d19a6d416efcf7dadaad93b6eb679254a0cdae5146beecbf333287a85f79141"
+    },
+    {
+      "path": "pilot-model-0/baseline-0-11-cash.json",
+      "sha256": "203e2fc7696e78c0778d9907ee6b91f66cbd8b609f63ba82d2f5e57d01d8cd91"
+    },
+    {
+      "path": "pilot-model-0/baseline-0-11-margin.json",
+      "sha256": "bf1db9171e1128f5039d6cad174223a7f09a8e66070263aab10a2ccb1df3fa39"
+    },
+    {
+      "path": "pilot-model-0/baseline-0-11-momentum.json",
+      "sha256": "80d3b2d65ca1271af83d370651b0d0a121295df6da7711ae3107ac51a46cf09b"
+    },
+    {
+      "path": "pilot-model-0/baseline-0-22-cash.json",
+      "sha256": "ab8d2d84391488818df8943009481cb9760de65af7b3aee5bd6c3b33adbf94d6"
+    },
+    {
+      "path": "pilot-model-0/baseline-0-22-margin.json",
+      "sha256": "5e43e76ffd2f8e07eac3c010ce7eb005d646f6e0eeaa0be64b38e5f19dec14be"
+    },
+    {
+      "path": "pilot-model-0/baseline-0-22-momentum.json",
+      "sha256": "3911994a9da71acc925984b5baaf1105569af669d8abaa8ca01920516ca0ad6c"
+    },
+    {
+      "path": "pilot-model-1/1-11.json",
+      "sha256": "b521925bf462e96f37a2ca918ad8d650c7341ea55446b486c37791a8791a36ae"
+    },
+    {
+      "path": "pilot-model-1/1-22.json",
+      "sha256": "6fc92558fc479bd91dc19004fb00d78999da9716150c7a82ebf20870fbcf0dc5"
+    },
+    {
+      "path": "pilot-model-1/baseline-1-11-cash.json",
+      "sha256": "203e2fc7696e78c0778d9907ee6b91f66cbd8b609f63ba82d2f5e57d01d8cd91"
+    },
+    {
+      "path": "pilot-model-1/baseline-1-11-margin.json",
+      "sha256": "bf1db9171e1128f5039d6cad174223a7f09a8e66070263aab10a2ccb1df3fa39"
+    },
+    {
+      "path": "pilot-model-1/baseline-1-11-momentum.json",
+      "sha256": "80d3b2d65ca1271af83d370651b0d0a121295df6da7711ae3107ac51a46cf09b"
+    },
+    {
+      "path": "pilot-model-1/baseline-1-22-cash.json",
+      "sha256": "ab8d2d84391488818df8943009481cb9760de65af7b3aee5bd6c3b33adbf94d6"
+    },
+    {
+      "path": "pilot-model-1/baseline-1-22-margin.json",
+      "sha256": "5e43e76ffd2f8e07eac3c010ce7eb005d646f6e0eeaa0be64b38e5f19dec14be"
+    },
+    {
+      "path": "pilot-model-1/baseline-1-22-momentum.json",
+      "sha256": "3911994a9da71acc925984b5baaf1105569af669d8abaa8ca01920516ca0ad6c"
+    },
+    {
+      "path": "pilot-model-2/2-11.json",
+      "sha256": "915475e1dbdd3237ffe69cad127b7bd346f16c32a5df8781404ea2baa3639c9f"
+    },
+    {
+      "path": "pilot-model-2/2-22.json",
+      "sha256": "65eb9e7772246b4b7962a59871c49d4d67a850ab57992127c9d136ecddc771ad"
+    },
+    {
+      "path": "pilot-model-2/baseline-2-11-cash.json",
+      "sha256": "203e2fc7696e78c0778d9907ee6b91f66cbd8b609f63ba82d2f5e57d01d8cd91"
+    },
+    {
+      "path": "pilot-model-2/baseline-2-11-margin.json",
+      "sha256": "bf1db9171e1128f5039d6cad174223a7f09a8e66070263aab10a2ccb1df3fa39"
+    },
+    {
+      "path": "pilot-model-2/baseline-2-11-momentum.json",
+      "sha256": "80d3b2d65ca1271af83d370651b0d0a121295df6da7711ae3107ac51a46cf09b"
+    },
+    {
+      "path": "pilot-model-2/baseline-2-22-cash.json",
+      "sha256": "ab8d2d84391488818df8943009481cb9760de65af7b3aee5bd6c3b33adbf94d6"
+    },
+    {
+      "path": "pilot-model-2/baseline-2-22-margin.json",
+      "sha256": "5e43e76ffd2f8e07eac3c010ce7eb005d646f6e0eeaa0be64b38e5f19dec14be"
+    },
+    {
+      "path": "pilot-model-2/baseline-2-22-momentum.json",
+      "sha256": "3911994a9da71acc925984b5baaf1105569af669d8abaa8ca01920516ca0ad6c"
+    },
+    {
+      "path": "pilot-model-3/3-11.json",
+      "sha256": "71d38b1a7f81bc5211785a598f7d40ff13498c1773c4107fd538daff62407bdf"
+    },
+    {
+      "path": "pilot-model-3/3-22.json",
+      "sha256": "5cfffa5405097a0df3e0571ef4f47b4d330be9cfac163b9c039d38e7ed2bad1a"
+    },
+    {
+      "path": "pilot-model-3/baseline-3-11-cash.json",
+      "sha256": "203e2fc7696e78c0778d9907ee6b91f66cbd8b609f63ba82d2f5e57d01d8cd91"
+    },
+    {
+      "path": "pilot-model-3/baseline-3-11-margin.json",
+      "sha256": "bf1db9171e1128f5039d6cad174223a7f09a8e66070263aab10a2ccb1df3fa39"
+    },
+    {
+      "path": "pilot-model-3/baseline-3-11-momentum.json",
+      "sha256": "80d3b2d65ca1271af83d370651b0d0a121295df6da7711ae3107ac51a46cf09b"
+    },
+    {
+      "path": "pilot-model-3/baseline-3-22-cash.json",
+      "sha256": "ab8d2d84391488818df8943009481cb9760de65af7b3aee5bd6c3b33adbf94d6"
+    },
+    {
+      "path": "pilot-model-3/baseline-3-22-margin.json",
+      "sha256": "5e43e76ffd2f8e07eac3c010ce7eb005d646f6e0eeaa0be64b38e5f19dec14be"
+    },
+    {
+      "path": "pilot-model-3/baseline-3-22-momentum.json",
+      "sha256": "3911994a9da71acc925984b5baaf1105569af669d8abaa8ca01920516ca0ad6c"
+    },
+    {
+      "path": "pilot-model-4/4-11.json",
+      "sha256": "3cbbb54471f41cfbd54b1d68250460620ddd052b152538cb7ba0b0d29ede429d"
+    },
+    {
+      "path": "pilot-model-4/4-22.json",
+      "sha256": "7691de451db98d626149465c9d7e15b9e348b8959470ed27d7df2c2fa352b490"
+    },
+    {
+      "path": "pilot-model-4/baseline-4-11-cash.json",
+      "sha256": "203e2fc7696e78c0778d9907ee6b91f66cbd8b609f63ba82d2f5e57d01d8cd91"
+    },
+    {
+      "path": "pilot-model-4/baseline-4-11-margin.json",
+      "sha256": "bf1db9171e1128f5039d6cad174223a7f09a8e66070263aab10a2ccb1df3fa39"
+    },
+    {
+      "path": "pilot-model-4/baseline-4-11-momentum.json",
+      "sha256": "80d3b2d65ca1271af83d370651b0d0a121295df6da7711ae3107ac51a46cf09b"
+    },
+    {
+      "path": "pilot-model-4/baseline-4-22-cash.json",
+      "sha256": "ab8d2d84391488818df8943009481cb9760de65af7b3aee5bd6c3b33adbf94d6"
+    },
+    {
+      "path": "pilot-model-4/baseline-4-22-margin.json",
+      "sha256": "5e43e76ffd2f8e07eac3c010ce7eb005d646f6e0eeaa0be64b38e5f19dec14be"
+    },
+    {
+      "path": "pilot-model-4/baseline-4-22-momentum.json",
+      "sha256": "3911994a9da71acc925984b5baaf1105569af669d8abaa8ca01920516ca0ad6c"
+    },
+    {
+      "path": "pilot-model-5/5-11.json",
+      "sha256": "35d4dc955c85567dbffab48d4f82dcfbae03fb1bdbfab6ec9192954bb347d44e"
+    },
+    {
+      "path": "pilot-model-5/5-22.json",
+      "sha256": "020ab32bebd140a591e3e23821283147219b033b0d02f96ac39733d8c66cdb8b"
+    },
+    {
+      "path": "pilot-model-5/baseline-5-11-cash.json",
+      "sha256": "203e2fc7696e78c0778d9907ee6b91f66cbd8b609f63ba82d2f5e57d01d8cd91"
+    },
+    {
+      "path": "pilot-model-5/baseline-5-11-margin.json",
+      "sha256": "bf1db9171e1128f5039d6cad174223a7f09a8e66070263aab10a2ccb1df3fa39"
+    },
+    {
+      "path": "pilot-model-5/baseline-5-11-momentum.json",
+      "sha256": "80d3b2d65ca1271af83d370651b0d0a121295df6da7711ae3107ac51a46cf09b"
+    },
+    {
+      "path": "pilot-model-5/baseline-5-22-cash.json",
+      "sha256": "ab8d2d84391488818df8943009481cb9760de65af7b3aee5bd6c3b33adbf94d6"
+    },
+    {
+      "path": "pilot-model-5/baseline-5-22-margin.json",
+      "sha256": "5e43e76ffd2f8e07eac3c010ce7eb005d646f6e0eeaa0be64b38e5f19dec14be"
+    },
+    {
+      "path": "pilot-model-5/baseline-5-22-momentum.json",
+      "sha256": "3911994a9da71acc925984b5baaf1105569af669d8abaa8ca01920516ca0ad6c"
+    }
+  ],
+  "cost_note": "Sum of successful response usage.cost; failed-request charges are not available. Budget accounting includes reservations and is not an invoice."
+}
