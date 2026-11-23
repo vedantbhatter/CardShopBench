@@ -26,3 +26,20 @@ class RateLimitTests(unittest.TestCase):
   with patch('rate_limits.time.sleep'),patch('rate_limits.urllib.request.urlopen',side_effect=urllib.error.HTTPError('x',429,'rate',{},None)) as f:
    with self.assertRaises(urllib.error.HTTPError):request_json(a,None,.1,0)
    self.assertEqual(f.call_count,4)
+ def test_error_diagnostics_redact_secret(self):
+  a=self.agent();a.key='test-private-key'
+  payload=b'{"error":{"message":"failed test-private-key user_123", "metadata":{"provider_name":"Example", "raw":"secret", "limit_source":"provider"}}}'
+  err=urllib.error.HTTPError('x',429,'rate',{'Retry-After':'400'},io.BytesIO(payload))
+  with patch('rate_limits.time.sleep'),patch('rate_limits.urllib.request.urlopen',side_effect=err):
+   with self.assertRaises(urllib.error.HTTPError):request_json(a,None,.1,0)
+  diagnostic=a.retry_events[0]['diagnostic']
+  self.assertEqual(diagnostic['provider_name'],'Example')
+  self.assertNotIn('test-private-key',str(diagnostic));self.assertNotIn('user_123',str(diagnostic));self.assertNotIn('raw',diagnostic)
+ def test_non_rate_http_error_not_retried(self):
+  a=self.agent()
+  with patch('rate_limits.time.sleep'),patch('rate_limits.urllib.request.urlopen',side_effect=urllib.error.HTTPError('x',402,'budget',{},io.BytesIO(b'{}'))) as f:
+   with self.assertRaises(urllib.error.HTTPError):request_json(a,None,.1,0)
+   self.assertEqual(f.call_count,1)
+ def test_retry_after_parsing(self):
+  self.assertEqual(retry_delay('60',0),60)
+  self.assertEqual(retry_delay(None,2),120)
