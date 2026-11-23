@@ -1,0 +1,31 @@
+name: Model compatibility checks
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: paid-model-experiments
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate environment
+        run: python -m unittest discover -s tests -v
+      - name: Probe six model endpoints (maximum $3.60 reserved)
+        env:
+          CARDSHOPBENCH_API_KEY: ${{ secrets.CARDSHOPBENCH_API_KEY }}
+        run: python scripts/compatibility.py
+      - name: Preserve experiment artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-compatibility-${{ github.run_id }}
+          path: runs/compatibility/
+          retention-days: 30
+          if-no-files-found: warn
