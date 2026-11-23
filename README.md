@@ -91,14 +91,6 @@ scripts/        model sweep and source packaging
 
 Enable GitHub Pages with source **GitHub Actions**, then run the `Publish report` workflow. It deploys the existing `dist/` artifact. Verify results and data permissions before replacing the bundled snapshot. The source archive excludes credentials, local model runs, and hosting identity.
 
-## Resume wording for this release
-
-> Built CardShopBench, a reproducible agent-evaluation environment for simulated Pokémon resale businesses, with timestamped pricing data, tool-based model execution, and auditable inventory accounting.
->
-> Executed 135 baseline episodes across nine market/execution configurations; implemented scenario analysis, transaction replay, and tests for cash conservation and deterministic recovery.
-
-Do not claim model rankings, autonomous real transactions, or real profits until those experiments have actually been performed.
-
 ## Attribution
 
 Inspired by [Entrepreneur-Bench](https://mwzhu.github.io/entrepreneur-bench/report.html), [Vending-Bench 2](https://andonlabs.com/evals/vending-bench-2), [Project Vend](https://www.anthropic.com/research/project-vend-1), [τ-bench](https://arxiv.org/abs/2406.12045), and [BrowseComp](https://arxiv.org/abs/2504.12516). Pricing references are from [TCGCSV](https://tcgcsv.com/), derived from TCGplayer. Card artwork remains the property of its respective owners. Independent project, not affiliated with Pokémon, Nintendo, or any marketplace.
