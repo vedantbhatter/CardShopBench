@@ -2,7 +2,7 @@
 
 **Can an AI turn a trading-card collection into a business?**
 
-[Interactive report](https://cardshopbench.man00p.chatgpt.site/) · [Source repository](https://github.com/vedantbhatter/CardShopBench)
+[Interactive report](https://vedantbhatter.github.io/CardShopBench/) · [Source repository](https://github.com/vedantbhatter/CardShopBench)
 
 CardShopBench is a reproducible environment for evaluating autonomous resale agents. Models research a market, allocate a $1,000 budget, buy inventory, set prices, and manage cash over simulated days. Python owns the accounting and execution; models only choose actions.
 
