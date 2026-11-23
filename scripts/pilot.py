@@ -33,15 +33,23 @@ def main():
  providers=['OpenAI','Claude Platform on AWS','Google','Relace','Darkbloom','Near AI']
  out=Path(os.environ.get('CARDSHOPBENCH_RUN_DIR','runs/pilot'));out.mkdir(parents=True,exist_ok=True)
  with urllib.request.urlopen('https://openrouter.ai/api/v1/models',timeout=30) as r:catalog={m['id']:m for m in json.load(r)['data']}
+ # Read only numeric account budget fields; never persist labels or credentials.
+ req=urllib.request.Request('https://openrouter.ai/api/v1/key',headers={'Authorization':'Bearer '+os.environ['CARDSHOPBENCH_API_KEY']})
+ with urllib.request.urlopen(req,timeout=30) as r:key_data=json.load(r)['data']
+ remaining=key_data.get('limit_remaining')
+ if not isinstance(remaining,(int,float)) or remaining<3.6:raise RuntimeError('Insufficient verified key budget for two episodes')
  meta=catalog[model];snap=load_snapshot('data/snapshot.json')
  for seed in [11,22]:
   a=PilotAgent(model,max_cost=1.8,input_rate=float(meta['pricing']['prompt'])*1.1e6,output_rate=float(meta['pricing']['completion'])*1.1e6);a.provider=providers[index];a.retry_events=[]
   cfg=Config(days=14,seed=seed,max_actions=6)
   result=run(snap,a,cfg,str(out/f'{index}-{seed}.checkpoint'))
   result['retry_events']=a.retry_events
-  result['experiment']={'commit':os.environ.get('GITHUB_SHA'),'catalog':meta,'provider':a.provider,'reasoning_effort':'low','system_sha256':hashlib.sha256(SYSTEM.encode()).hexdigest(),'research_corpus':[],'transport_revision':'paced-429-retry-v1','original_run':45282574457}
+  result['reported_api_cost_usd']=sum(t['response'].get('usage',{}).get('cost',0) or 0 for t in a.transcript)
+  result['termination_reason']='completed' if result['status']=='completed' else ('budget' if 'budget' in str(result['error']).lower() else 'request_or_runtime_error')
+  result['experiment']={'commit':os.environ.get('GITHUB_SHA'),'catalog':meta,'provider':a.provider,'reasoning_effort':'low','system_sha256':hashlib.sha256(SYSTEM.encode()).hexdigest(),'research_corpus':[],'transport_revision':'paced-429-diagnostics-v2','original_run':45282574457}
   (out/f'{index}-{seed}.json').write_text(json.dumps(result,indent=2))
   print(model,seed,result['status'],result['usage'],result['error'],flush=True)
   for name in ['cash','margin','momentum']:
    (out/f'baseline-{index}-{seed}-{name}.json').write_text(json.dumps(run(snap,Baseline(name),cfg),indent=2))
+  if seed==11:time.sleep(60)
 if __name__=='__main__':main()
