@@ -1,0 +1,36 @@
+[
+  {
+    "id": "forum-vintage-floor",
+    "source_url": "https://www.reddit.com/r/PokeInvesting/comments/1xwy3j6/vintage_and_midera_look_like_theyve_found_a/",
+    "title": "Discussion: vintage stability versus continued modern declines",
+    "content": "A collector argues that vintage and mid-era graded prices may be stabilizing while modern supply remains elevated. Replies distinguish graded prices from raw-card behavior and challenge the broader market narrative. This is opinion, not verified transaction data.",
+    "topics": [
+      "vintage",
+      "modern",
+      "graded",
+      "supply"
+    ],
+    "evidence_type": "unverified_forum_opinion",
+    "published_at": "2026-11-23T21:52:25.570372+00:00",
+    "observed_at": "2026-11-23T21:52:25.570372+00:00",
+    "timestamp_note": "Exact source publication time unverified; acquisition time used as conservative availability cutoff.",
+    "summary_method": "Manually reviewed paraphrase of public thread; not an automated feed."
+  },
+  {
+    "id": "forum-middle-ground",
+    "source_url": "https://www.reddit.com/r/PokeInvesting/comments/1xuq2e0/too_hot_to_buy_too_common_to_moon_wheres_the/",
+    "title": "Discussion: scarcity, population and the middle ground",
+    "content": "A collector worries that vintage prices have risen too quickly while modern cards have high graded populations. Replies suggest considering older modern sets, but offer conflicting expectations. No sale prices or population counts have been independently validated.",
+    "topics": [
+      "vintage",
+      "modern",
+      "population",
+      "scarcity"
+    ],
+    "evidence_type": "unverified_forum_opinion",
+    "published_at": "2026-11-23T21:52:25.570372+00:00",
+    "observed_at": "2026-11-23T21:52:25.570372+00:00",
+    "timestamp_note": "Exact source publication time unverified; acquisition time used as conservative availability cutoff.",
+    "summary_method": "Manually reviewed paraphrase of public thread; not an automated feed."
+  }
+]
