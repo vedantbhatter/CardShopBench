@@ -6,42 +6,32 @@
 
 CardShopBench is a reproducible environment for evaluating autonomous resale agents. Models research a market, allocate a $1,000 budget, buy inventory, set prices, and manage cash over simulated days. Python owns the accounting and execution; models only choose actions.
 
-**Release status:** working v0.1 research prototype. The bundled report contains **135 executed rule-based baseline episodes**, **75 observed TCGplayer-derived pricing references**, and a **six-model pilot: 12 attempts, six completed episodes, six HTTP-429 interruptions**. All transaction opportunities, price paths after initialization, and sale outcomes are simulated. This is not a validated predictor of real-world returns.
+**Release status:** working v0.1 research prototype. The bundled report contains **135 executed rule-based baseline episodes**, **75 observed TCGplayer-derived pricing references**, and a **four-model comparison with eight completed episodes**. All transaction opportunities, price paths after initialization, and sale outcomes are simulated. This is not a validated predictor of real-world returns.
 
-## Measured model pilot — November 23, 2026
+## Completed model comparison
 
-[Original run 45282574457](https://github.com/vedantbhatter/CardShopBench/actions/runs/45282574457) · [Original traces](dist/pilot-artifacts.zip) · [Summary and SHA-256 manifest](dist/pilot-summary.json)
+[Comparison traces](dist/comparison-traces.zip) · [Results and provenance](dist/comparison.json)
 
-Six models, seeds 11 and 22, 14 days, six actions/day, $1,000 simulated starting capital, mixed/base scenario, low reasoning, 4,096 maximum output tokens, pinned providers, and no research corpus. Source commit: `c92f0f37b529cc49ddd01f5b4ab63c52e6374cb8`. The research tool was available but empty; this pilot did not conduct live marketplace trading or forum research.
+The comparison covers four models with two completed episodes each: seeds 11 and 22, 14 simulated days, six actions/day, $1,000 starting capital, mixed market and base execution, low reasoning requested, 4,096 maximum output tokens, and pinned providers. The research corpus was empty. Business profit is ending simulated equity minus starting capital; API spending is reported separately.
 
-| Model | Completion | Seed 11 profit | Seed 22 profit | Mean profit | Reported API cost |
-| --- | --- | ---: | ---: | ---: | ---: |
-| `openai/gpt-6.2-astra` | 0 / 2 · HTTP 429 | — | — | Not ranked | $0.870260 |
-| `anthropic/claude-opus-5.5` | 2 / 2 complete | $90.35 | $139.71 | $115.03 | $1.790068 |
-| `google/gemini-4-neon` | 2 / 2 complete | $102.72 | $115.76 | $109.24 | $2.458935 |
-| `moonshotai/kimi-k3.1-pro` | 0 / 2 · HTTP 429 | — | — | Not ranked | $0.038594 |
-| `qwen/qwen3.8-27b` | 2 / 2 complete | $98.73 | $123.76 | $111.25 | $0.252624 |
-| `openai/gpt-oss-120b` | 0 / 2 · HTTP 429 | — | — | Not ranked | $0.000098 |
+| Model | Seed 11 profit | Seed 22 profit | Mean profit | API cost · both episodes |
+| --- | ---: | ---: | ---: | ---: |
+| `openai/gpt-6.2-astra` | $121.43 | $117.62 | $119.53 | $3.118476 |
+| `anthropic/claude-opus-5.5` | $90.35 | $139.71 | $115.03 | $1.790068 |
+| `qwen/qwen3.8-27b` | $98.73 | $123.76 | $111.25 | $0.252624 |
+| `google/gemini-4-neon` | $102.72 | $115.76 | $109.24 | $2.458935 |
 
-Profit means terminal simulated equity minus initial capital, before inference cost. Incomplete outcomes are not ranked. API costs sum `response.usage.cost` from successful responses across both attempts; they total **$5.4105784899**. Failed-request billing is unavailable. The budget ledger includes conservative reservations and must not be interpreted as actual charges. Prior compatibility spending of approximately $0.065 is separate.
+The eight displayed episodes report **$7.620103** in API costs. This is comparison-only inference spending, not total project spending. All four models exceeded the matched margin control on both seeds. GPT and Gemini recorded zero invalid actions, Qwen one, and Claude 13.
 
-### Matched controls
+Matched 14-day controls: **margin buyer $17.20**, **cash hold $0.00**, and **hype chaser −$8.49** mean profit. Controls share the same snapshot, seeds, horizon, capital, market assumptions, and action budget; their direct access to public scenario prices differs from the LLM tool interface. The 135 baseline episodes use a separate 30-day sensitivity protocol.
 
-| Control | Seed 11 profit | Seed 22 profit | Mean profit |
-| --- | ---: | ---: | ---: |
-| Margin buyer | $14.43 | $19.97 | $17.20 |
-| Cash hold | $0.00 | $0.00 | $0.00 |
-| Hype chaser | $0.00 | $-16.98 | $-8.49 |
+Two seeds per model support descriptive comparisons only, not a reliable model ranking or statistical significance claim. Equity includes unsettled proceeds and estimated inventory liquidation. Price paths and buyer demand are synthetic and are not calibrated forecasts of real resale returns.
 
-The control files duplicated across six artifacts were checked for equality and deduplicated to six unique episodes. Controls share the pilot's snapshot, seed, initial capital, scenario, regime, horizon, and action budget; they have direct access to public scenario prices rather than the LLM tool interface. The existing 135-episode baseline suite uses 30 days and is retained as a separate sensitivity study.
+### Reproducibility
 
-### Failures and limitations
+Claude, Qwen, and Gemini use run 45282574457 at commit c92f0f37b529cc49ddd01f5b4ab63c52e6374cb8. GPT uses run 45293031840 at commit 8cad85761469e9d3296d0e28ccf8c6d44cdb76bf, with sequential execution, request pacing, and bounded transport retries. The simulation, system prompt, seeds, and action budgets are matched; transport settings differ. Original requests, responses, configurations, and file hashes are included in the downloads.
 
-All six interrupted episodes ended on HTTP 429, not a budget stop. On seed 11, GPT reached day 7 with 42 successful responses, Kimi day 3 with 20, and gpt-oss day 0 with four. Their seed-22 attempts had no successful responses. CI jobs succeeded because result artifacts were saved; this does not imply episode completion.
-
-All three completed models exceeded the margin control on both seeds. Claude recorded 13 invalid actions, Qwen one, and Gemini zero across two episodes. Claude and Qwen sold all purchased units; Gemini's ending equity includes non-cash assets. Two seeds are insufficient for a reliable ranking or significance claim. Synthetic price paths and demand are not calibrated real-market forecasts, and observed differences may depend on provider, token usage, reasoning settings, and this single configuration.
-
-The original run used up to three concurrent jobs and no automatic rate-limit retries. The $1.80 per-episode request guard implied a $21.60 planned maximum; a separate $25 key cap was configured. Subsequent pacing/retry improvements are not part of these results. Original attempts remain available in the trace archive. No additional paid runs were started for this publication.
+No live transactions or forum research occurred in these episodes.
 
 ## Run locally
 
