@@ -48,7 +48,7 @@ class Baseline:
             if action:
                 return action
         for item in market.inventory:
-            if item['arrival_day'] <= market.day:
+            if item['arrival_day'] <= market.day and item.get('authentic', True):
                 target = round(market.price(item['card_id']) * (.98 if self.style == 'margin' else 1.08))
                 if item['price_cents'] != target:
                     return {'tool':'list_item', 'args':{'item_id':item['item_id'],'price_cents':target},
