@@ -2,16 +2,16 @@
 import os,sys,json,time,hashlib,urllib.request
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from cardshopbench.agents import ModelAgent,SYSTEM,Baseline
-from cardshopbench.cli import run
+from cardshopbench.agents import ModelAgent,Baseline,system_prompt
+from cardshopbench.cli import run,MARKETPLACE
 from cardshopbench.engine import Config
-from cardshopbench.data import load_snapshot
+from cardshopbench.data import load_snapshot,with_sealed
 from compatibility import MODELS
 from rate_limits import request_json
 
 class PilotAgent(ModelAgent):
  def step(self,market):
-  messages=[{'role':'system','content':SYSTEM},{'role':'user','content':json.dumps({'state':market.state(),'recent_events':market.events[-8:]})}]
+  messages=[{'role':'system','content':self.system},{'role':'user','content':json.dumps({'state':market.state(),'recent_events':market.events[-8:]})}]
   reserve=((len(json.dumps(messages).encode())+512)*self.input_rate+4096*self.output_rate)/1e6
   if self.usage['cost_usd']+reserve>self.max_cost: raise RuntimeError('Episode budget reached')
   payload={'model':self.name,'messages':messages,'max_tokens':4096,'response_format':{'type':'json_object'},'reasoning':{'effort':'low'},'provider':{'require_parameters':True,'allow_fallbacks':False,'order':[self.provider],'max_price':{'prompt':self.input_rate,'completion':self.output_rate}}}
@@ -30,26 +30,35 @@ class PilotAgent(ModelAgent):
 
 def main():
  index=int(sys.argv[1]);model=MODELS[index]
+ # CARDSHOPBENCH_TRACK=marketplace adds sealed product and private sellers (scams, negotiation).
+ track=os.environ.get('CARDSHOPBENCH_TRACK','base')
+ if track not in ('base','marketplace'):raise SystemExit('Unknown track')
+ budget=1.8 if track=='base' else 3.5  # marketplace allows 10 actions/day instead of 6
  providers=['OpenAI','Claude Platform on AWS','Google','Relace','Darkbloom','Near AI']
- out=Path(os.environ.get('CARDSHOPBENCH_RUN_DIR','runs/pilot'));out.mkdir(parents=True,exist_ok=True)
+ out=Path(os.environ.get('CARDSHOPBENCH_RUN_DIR','runs/pilot' if track=='base' else 'runs/marketplace'));out.mkdir(parents=True,exist_ok=True)
  with urllib.request.urlopen('https://openrouter.ai/api/v1/models',timeout=30) as r:catalog={m['id']:m for m in json.load(r)['data']}
  # Read only numeric account budget fields; never persist labels or credentials.
  req=urllib.request.Request('https://openrouter.ai/api/v1/key',headers={'Authorization':'Bearer '+os.environ['CARDSHOPBENCH_API_KEY']})
  with urllib.request.urlopen(req,timeout=30) as r:key_data=json.load(r)['data']
  remaining=key_data.get('limit_remaining')
- if not isinstance(remaining,(int,float)) or remaining<3.6:raise RuntimeError('Insufficient verified key budget for two episodes')
+ if not isinstance(remaining,(int,float)) or remaining<2*budget:raise RuntimeError('Insufficient verified key budget for two episodes')
  meta=catalog[model];snap=load_snapshot('data/snapshot.json')
+ if track=='marketplace':snap=with_sealed(snap,load_snapshot('data/sealed.json'))
  for seed in [11,22]:
-  a=PilotAgent(model,max_cost=1.8,input_rate=float(meta['pricing']['prompt'])*1.1e6,output_rate=float(meta['pricing']['completion'])*1.1e6);a.provider=providers[index];a.retry_events=[]
-  cfg=Config(days=14,seed=seed,max_actions=6)
+  a=PilotAgent(model,max_cost=budget,input_rate=float(meta['pricing']['prompt'])*1.1e6,output_rate=float(meta['pricing']['completion'])*1.1e6);a.provider=providers[index];a.retry_events=[]
+  cfg=Config(days=14,seed=seed,max_actions=6) if track=='base' else Config(seed=seed,**MARKETPLACE)
+  a.system=system_prompt(cfg)
   result=run(snap,a,cfg,str(out/f'{index}-{seed}.checkpoint'))
   result['retry_events']=a.retry_events
   result['reported_api_cost_usd']=sum(t['response'].get('usage',{}).get('cost',0) or 0 for t in a.transcript)
   result['termination_reason']='completed' if result['status']=='completed' else ('budget' if 'budget' in str(result['error']).lower() else 'request_or_runtime_error')
-  result['experiment']={'commit':os.environ.get('GITHUB_SHA'),'catalog':meta,'provider':a.provider,'reasoning_effort':'low','system_sha256':hashlib.sha256(SYSTEM.encode()).hexdigest(),'research_corpus':[],'transport_revision':'paced-429-diagnostics-v2','original_run':45282574457}
+  result['experiment']={'commit':os.environ.get('GITHUB_SHA'),'catalog':meta,'provider':a.provider,'reasoning_effort':'low','track':track,'system_sha256':hashlib.sha256(a.system.encode()).hexdigest(),'research_corpus':[],'transport_revision':'paced-429-diagnostics-v2','original_run':45282574457}
   (out/f'{index}-{seed}.json').write_text(json.dumps(result,indent=2))
   print(model,seed,result['status'],result['usage'],result['error'],flush=True)
   for name in ['cash','margin','momentum']:
    (out/f'baseline-{index}-{seed}-{name}.json').write_text(json.dumps(run(snap,Baseline(name),cfg),indent=2))
+  if track=='marketplace':
+   for name in ['trusting','verifier']:
+    (out/f'baseline-{index}-{seed}-{name}.json').write_text(json.dumps(run(snap,Baseline(name),cfg),indent=2))
   if seed==11:time.sleep(60)
 if __name__=='__main__':main()

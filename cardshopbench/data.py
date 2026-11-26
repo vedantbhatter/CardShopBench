@@ -56,6 +56,57 @@ def collect(group_ids, output, per_group=25):
     Path(output).write_text(json.dumps(result, indent=2))
     return result
 
+SEALED_TYPES = [('Booster Box', 'booster_box'), ('Elite Trainer Box', 'elite_trainer_box'),
+                ('Booster Bundle', 'booster_bundle'), ('Build & Battle Box', 'build_and_battle'),
+                ('Booster Pack', 'booster_pack')]
+
+def sealed_type(name):
+    """Classify single sealed products; skip cases, multi-box sets, code cards and exclusives."""
+    if any(x in name for x in ('Code Card', 'Case', 'Set of', 'Half Booster', 'Sleeved', 'Art Bundle', 'Exclusive')):
+        return None
+    return next((kind for label, kind in SEALED_TYPES if label in name), None)
+
+def collect_sealed(group_ids, output, max_dollars=2500):
+    """Snapshot of sealed product references (booster boxes, ETBs, bundles, packs)."""
+    groups = {g['groupId']: g for g in fetch(BASE + '/groups')['results']}
+    now = datetime.now(timezone.utc).isoformat()
+    products_out, sources = [], []
+    for gid in group_ids:
+        group = groups[gid]
+        purl, vurl = f'{BASE}/{gid}/products', f'{BASE}/{gid}/prices'
+        products = {p['productId']: p for p in fetch(purl)['results']}
+        year = int(group.get('publishedOn', '2020')[:4])
+        era = 'vintage' if year <= 2003 else 'hypermodern' if year >= 2023 else 'modern'
+        for price in fetch(vurl)['results']:
+            product = products.get(price['productId'])
+            if not product or not price.get('marketPrice') or price['marketPrice'] > max_dollars:
+                continue
+            kind = sealed_type(product['name'])
+            if not kind:
+                continue
+            products_out.append({'id': f"{product['productId']}-sealed", 'name': product['name'], 'set': group['name'],
+                'number': None, 'variant': 'Sealed', 'era': era, 'product_type': kind,
+                'reference_cents': round(price['marketPrice'] * 100), 'condition': 'factory sealed aggregate',
+                'source_url': product.get('url', purl), 'image_url': product.get('imageUrl'), 'observed_at': now,
+                'source': 'TCGCSV / TCGplayer-derived', 'observation_kind': 'aggregate_market_reference'})
+        sources.extend([purl, vurl])
+    if not products_out:
+        raise ValueError('No eligible sealed products found')
+    result = {'schema_version': 1, 'observed_at': now, 'mode': 'real_snapshot', 'sources': sources,
+              'limitations': ['Aggregate references for factory-sealed product, not individual sold records.'],
+              'cards': products_out}
+    result['sha256'] = hashlib.sha256(json.dumps(products_out, sort_keys=True).encode()).hexdigest()
+    Path(output).parent.mkdir(parents=True, exist_ok=True)
+    Path(output).write_text(json.dumps(result, indent=2))
+    return result
+
+def with_sealed(snapshot, sealed):
+    """One product universe: singles plus sealed product. Singles get product_type 'single'."""
+    cards = [dict(c, product_type=c.get('product_type', 'single')) for c in snapshot['cards']]
+    merged = dict(snapshot, cards=cards + list(sealed['cards']))
+    merged['sha256'] = hashlib.sha256(json.dumps(merged['cards'], sort_keys=True).encode()).hexdigest()
+    return merged
+
 def load_snapshot(path):
     data = json.loads(Path(path).read_text())
     if not data.get('cards'):

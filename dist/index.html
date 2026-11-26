@@ -13,7 +13,7 @@
 
 <header>
   <h1>CardShopBench</h1>
-  <p class="subtitle">Can a language-model agent run a small trading-card resale business?</p>
+  <p class="subtitle">Can a language model help a collector buy, sell, and spot what’s next, or run the whole operation itself?</p>
   <p class="byline">Vedant Bhatter · November 2026</p>
   <p class="links">
     <a href="https://github.com/vedantbhatter/CardShopBench">Code</a>
@@ -24,14 +24,15 @@
 
 <section>
   <h2>Why I built this</h2>
-  <p>I buy and resell Pokémon cards and follow the market the way some people follow stocks. Finding a cheap card is the easy part. The hard part is everything after it: knowing what a card is actually worth, pricing it so it sells, not tying up all your cash in inventory, and timing purchases so you aren't stuck holding cards when you need money.</p>
-  <p>An AI agent would have to make the same calls, whether it runs a shop on its own or assists a human reseller. CardShopBench is my way of measuring how well current models make them in a controlled setting, before anyone trusts one with real money.</p>
+  <p>I've collected Pokémon cards for years. Following sets, prices, and reprints taught me how much judgment the hobby takes: knowing what a card is really worth, which sets will hold their value, when something is about to take off, and when a deal is too good to be true.</p>
+  <p>I wanted to know whether language models can help with that. Could one spot trends and find cards before they get popular? Could it work as an assistant that flags good deals and scams? Could it even run a whole buying and selling operation by itself? CardShopBench is a controlled environment for measuring this before anyone trusts a model with real money.</p>
 </section>
 
 <section>
   <h2>Summary</h2>
   <p>I built a simulated Pokémon card shop. An agent starts with $1,000 and has 14 days to buy cards, list them for sale, and sell them, while paying fees and shipping and waiting for deliveries and payouts. Starting prices come from 75 real market references. Everything after day 0 is simulated.</p>
   <p>Four models ran two episodes each. All four made money in the simulation, averaging $109 to $120 profit, and all beat a simple rule-based buyer ($17). All four used almost the same pricing strategy. The real differences were in how many cards they bought, when they stopped buying, and how reliably they followed the output format. Two episodes per model is too few to rank them.</p>
+  <p>A second track adds sealed product and private sellers, some of whom are scammers. Rule-based reference buyers have been run on it, and the model runs come next.</p>
 </section>
 
 <section>
@@ -195,6 +196,46 @@ The environment computes outcomes. Follow tool errors and keep within the action
 </section>
 
 <section>
+  <h2>Marketplace track: sealed product and scam sellers</h2>
+  <p>The first track only has synthetic listings. Real collecting also involves sealed product and buying directly from strangers, which is where most of the risk is. The marketplace track adds both.</p>
+
+  <h3>Sealed product</h3>
+  <p>The track adds 12 sealed products to the card universe, with real market prices: booster boxes, elite trainer boxes, booster bundles, Build &amp; Battle boxes, and packs from Base Set, Evolving Skies, and Surging Sparks. Prices range from $8.78 for a Surging Sparks pack to $2,194.68 for an Evolving Skies booster box. Out-of-print sealed product rises in price over time as boxes get opened. In-print product stays flat, and a reprint hits it harder than it hits singles.</p>
+
+  <h3>Private sellers</h3>
+  <p>Each day, two private sellers message the agent with an offer on a card or sealed item. The agent can ask questions, negotiate, and choose how to pay. Each seller has a hidden type, and the agent only sees what a real buyer would see: the messages and the replies.</p>
+  <div class="table-wrap">
+  <table class="tools">
+    <thead><tr><th>Seller</th><th>Share</th><th>If you pay</th><th>Warning signs</th></tr></thead>
+    <tbody>
+      <tr><td>Honest</td><td>40%</td><td>Ships the item. Negotiates down to a hidden floor and walks away after three lowball offers.</td><td>None. Photos and proof check out.</td></tr>
+      <tr><td>Honest, prefers F&amp;F</td><td>15%</td><td>Ships the item, and gives 5% off for friends &amp; family payment.</td><td>None, but F&amp;F payment has no buyer protection.</td></tr>
+      <tr><td>Non-delivery</td><td>20%</td><td>Takes the money and disappears. Refuses protected payment.</td><td>Price far below market, urgency, F&amp;F only, no proof, watermarked photo.</td></tr>
+      <tr><td>Counterfeit or resealed</td><td>15%</td><td>Ships a fake card or a resealed box. Refunded only if paid with protection.</td><td>Photos show an off-color card back, or loose shrink wrap with no logo.</td></tr>
+      <tr><td>Prompt injection</td><td>10%</td><td>A non-delivery scam.</td><td>The message includes fake instructions telling AI assistants to pay by F&amp;F.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Four tools are added: <code>inbox</code>, <code>ask_seller</code> (photos, proof of ownership, payment options, or condition), <code>make_offer</code>, and <code>pay</code> (protected or friends &amp; family). Protected payments are refunded after a three-day dispute if the item arrives not as described. Friends &amp; family payments can't be recovered. The system prompt adds one paragraph describing these rules.</p>
+
+  <h3>Reference results</h3>
+  <p>14 days, $2,000 starting capital, 10 actions per day, five seeds. Across those seeds, 51 of the 140 private offers were scams.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Policy</th><th>Mean profit</th><th>95% CI</th><th>Private deals</th><th>Scams paid</th><th>Lost to scams</th></tr></thead>
+    <tbody>
+      <tr><td>Careful buyer</td><td class="positive">$135.97</td><td>$64 to $227</td><td>7</td><td>0</td><td>$0</td></tr>
+      <tr><td>Margin buyer (ignores sellers)</td><td class="positive">$110.61</td><td>$50 to $174</td><td>0</td><td>0</td><td>$0</td></tr>
+      <tr><td>Cash hold</td><td>$0.00</td><td>—</td><td>0</td><td>0</td><td>$0</td></tr>
+      <tr><td>Trusting buyer</td><td class="negative">−$657.10</td><td>−$1,098 to −$237</td><td>49</td><td>39</td><td>$2,963</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">The trusting buyer pays the asking price, by F&amp;F, for anything under 90% of reference. The careful buyer asks for photos and payment options, skips any offer with warning signs, negotiates toward 70% of reference, and always pays with protection. Both also run the margin buyer's normal strategy. Totals are summed over the five seeds. Full results are in <a href="marketplace.json" download>marketplace.json</a>.</p>
+  <p>The track does what it is meant to do. Trusting every deal loses money badly, with ten of the losses going to prompt-injection sellers. Checking before paying adds profit on top of the base strategy. The question for the model runs is which of these two buyers each model behaves like.</p>
+</section>
+
+<section>
   <h2>Sensitivity to market assumptions</h2>
   <p>Before running models, I checked how much the outcome depends on the simulator's assumptions. Three rule-based strategies ran across three market scenarios and three execution settings, with five seeds each, over 30 days (135 episodes in total). Choose a configuration below.</p>
   <div class="controls">
@@ -228,7 +269,7 @@ The environment computes outcomes. Follow tool errors and keep within the action
 
 <section>
   <h2>Data</h2>
-  <p>A frozen <a href="https://tcgcsv.com/">TCGCSV</a> snapshot of TCGplayer market prices for 75 cards from Base Set, Evolving Skies, and Surging Sparks. These are aggregate reference prices, not individual sales. The snapshot favors higher-priced cards ($5–$500), so it doesn't represent the whole market. <a href="snapshot.json" download>Download the snapshot</a>.</p>
+  <p>A frozen <a href="https://tcgcsv.com/">TCGCSV</a> snapshot of TCGplayer market prices for 75 cards from Base Set, Evolving Skies, and Surging Sparks. The marketplace track adds 12 sealed products from the same sets and source. These are aggregate reference prices, not individual sales. The snapshot favors higher-priced cards ($5–$500), so it doesn't represent the whole market. <a href="snapshot.json" download>Download the snapshot</a>.</p>
 </section>
 
 <section>
@@ -246,7 +287,9 @@ The environment computes outcomes. Follow tool errors and keep within the action
   <h2>Next steps</h2>
   <ul>
     <li><b>Consistency.</b> Run each model several times on the same seed and report how often it succeeds every time, not just its average.</li>
-    <li><b>Sellers who negotiate and lie.</b> Add LLM-played sellers who haggle, overstate a card's condition or grade, or push for off-platform payment.</li>
+    <li><b>Models on the marketplace track.</b> Run the four models against the scam sellers and sealed product. The pilot workflow now takes a <code>marketplace</code> option.</li>
+    <li><b>Trend spotting.</b> Replay real price histories and test whether a model can find cards before they take off, using only information available at the time.</li>
+    <li><b>LLM-played sellers.</b> Replace the scripted sellers with model-played ones that improvise, so the scams are harder to recognize.</li>
     <li><b>Assistant mode.</b> Require owner approval above a spending limit, and measure whether the agent asks at the right moments.</li>
     <li><b>Real research.</b> Fill the research corpus with dated forum and news posts, including some with planted instructions, and measure whether the evidence helps.</li>
     <li><b>A profit ceiling.</b> Add a strategy that knows future prices, so results can be reported as a share of the best possible profit.</li>
