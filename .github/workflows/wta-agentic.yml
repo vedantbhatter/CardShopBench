@@ -25,11 +25,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
-            -f ref=refs/tags/wta-agentic-usd25-v1 -f sha="$GITHUB_SHA" >/dev/null
+            -f ref=refs/tags/wta-agentic-usd25-v1-cont1 -f sha="$GITHUB_SHA" >/dev/null
       - name: Run one coordinator with cumulative staged budget
         env:
           CARDSHOPBENCH_API_KEY: ${{ secrets.CARDSHOPBENCH_API_KEY }}
-          WTA_PILOT_CLAIM: wta-agentic-usd25-v1
+          WTA_PILOT_CLAIM: wta-agentic-usd25-v1-cont1
         run: node wta-agentic/run.mjs live runs/wta-agentic
       - name: Preserve synthetic traces and spend ledger
         if: always()
