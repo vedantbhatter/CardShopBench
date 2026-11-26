@@ -1,0 +1,15 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {contractScenarios,SYSTEM_V2} from './contract-v2.mjs';
+import {Sandbox} from './sandbox.mjs';
+import {grade} from './grade.mjs';
+test('month-to-date coverage covers every elapsed calendar day and marks the current day partial',()=>{
+ for(const seed of [11,22]){const s=contractScenarios(seed).find(s=>s.family==='hours'),b=new Sandbox(s),r=b.arithmetic();assert.equal(r.totalMinutes,seed===11?540:525);assert.equal(r.missingDates.length,22);assert.equal(r.missingDates[0],'2026-11-03');assert.equal(r.missingDates.at(-1),'2026-11-24');assert.deepEqual(r.partialDates,['2026-11-25']);assert.equal(r.asOf,s.now);assert.equal(r.openPeriod,true);assert.equal(b.records().expectedDates.length,25);assert.ok(!b.records().expectedDates.includes('2026-11-26'));}
+});
+test('contract clarification contains no held-out numeric answers',()=>{assert.ok(!SYSTEM_V2.includes('540'));assert.ok(!SYSTEM_V2.includes('525'));assert.match(SYSTEM_V2,/if no observer is named, use null/);});
+test('delegated-only monthly flow delivers accurate provenance without exposing raw time records',()=>{
+ const s=contractScenarios(22).find(s=>s.id.startsWith('hours-partial')),b=new Sandbox(s);b.call('read_context',{});b.call('request_hours_summary',{month:'2026-11',recipientId:'wayne',requestKey:'h'});b.call('delegate_task',{taskId:'task-1',agentId:'business:timekeeping',permissions:['task.execute','outbox.deliver']});b.call('finish',{outcome:'completed',summary:'Sent partial recorded actual time internally to Wayne. Unverified November 3–24; November 25 is partial. No future time or appointments included.'});assert.equal(grade(b).accepted,true);assert.ok(b.call('read_time_records',{subjectId:'gary',workspaceId:'synthetic',month:'2026-11'}).error);
+});
+import {episode} from './run.mjs';
+test('versioned delegated protocol actually reaches the model with no raw-record tools',async()=>{const s=contractScenarios(11).find(s=>s.family==='hours');await episode(s,{id:'synthetic-test'},async(p,m,t)=>{assert.equal(m[0].content,SYSTEM_V2);assert.ok(!t.some(t=>['read_time_records','calculate_hours'].includes(t.function.name)));return {cost:0,message:{role:'assistant',content:'test',tool_calls:[]}};},{system:SYSTEM_V2});});
+test('fresh holdout changes identity, site, service, window, duration and private hours evidence without changing the prompt',()=>{const fresh=contractScenarios(33);assert.equal(fresh.length,4);for(const s of fresh){assert.equal(s.seed,33);assert.equal(s.split,'heldout-fresh');if(s.family==='intake'){assert.match(s.text,/Synthetic Masonry/);assert.match(s.text,/Synthetic Meadow Site/);assert.equal(s.schedule.service,'footing');assert.equal(s.schedule.durationMinutes,90);const b=new Sandbox(s);b.call('ask_user',{question:s.omitted==='email'?'What is your email?':'Which date?'});b.call('submit_intake',{...s.intakeIdentity,request:s.schedule,idempotencyKey:'fresh'});b.call('finish',{outcome:'completed',summary:'Intake saved'});assert.equal(grade(b).accepted,true);}else assert.equal(new Sandbox(s).arithmetic().totalMinutes,555);}});

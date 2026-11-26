@@ -1,9 +1,9 @@
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {join} from 'node:path';
 const dir=process.argv[2];if(!dir)throw Error('Specify artifact directory');
 const read=name=>JSON.parse(readFileSync(join(dir,name),'utf8'));
 const jsonl=name=>readFileSync(join(dir,name),'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
-const rows=jsonl('episodes.jsonl'),attempts=jsonl('attempts.jsonl'),manifest=read('manifest.json'),summary=read('summary.json');
+const rows=existsSync(join(dir,'episodes-corrected.jsonl'))?jsonl('episodes-corrected.jsonl'):jsonl('episodes.jsonl'),attempts=existsSync(join(dir,'attempts-corrected.json'))?read('attempts-corrected.json'):existsSync(join(dir,'attempts-final.json'))?read('attempts-final.json'):jsonl('attempts.jsonl'),manifest=read('manifest.json'),summary=read('summary.json');
 const quantile=(x,q)=>x.length?[...x].sort((a,b)=>a-b)[Math.floor((x.length-1)*q)]:null;
 let seed=20261125;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
 const base=id=>id.replace(/-\d+$/,'');

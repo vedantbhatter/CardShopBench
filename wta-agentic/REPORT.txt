@@ -1,0 +1,13 @@
+WTA agentic pilot — November 25, 2026
+
+Provisional recommendation: GLM 5.3 on Relace FP4 for bounded routine workflows; GPT-6.1 Sol as an authorized-task fallback. Render personal-hours totals and coverage directly from the deterministic worker. One GLM acknowledgement had unsupported coverage wording despite a correct delivered receipt. No general prose-quality or engineering-judgment claim is made.
+
+Validated outcomes: GLM 42/42; Sol 42/42; Opus 39/42 (three empty provider-filter replies). Each completed 24/24 viable business tasks and recovered 6/6 injected failures. Zero authority violations and invalid native-tool calls were observed. GLM asked one unnecessary question; the others none in the validated panel.
+
+All-pilot cost per validated business completion: GLM $0.0042; Sol $0.0198; Opus $0.1359–$0.1504. These include setup, failed attempts and superseded experiments.
+
+Total: 191 live episodes, 739 inference attempts. Reported charged cost $3.8411779264; unresolved full reservations $0.367546776; conservative total $4.2087247024 under the original $25 authorization. No pending supplemental billing reserves. Standard public GitHub Linux runner compute $0; no paid judges, GPUs or live tools.
+
+The validated panel has 126 matched episodes: 30 baseline scheduling/approval/report/scope cases and 12 corrected intake/month-to-date cases per model. Fresh held-out field/evidence combinations repeated twice passed 24/24. Earlier contract tests and partial DeepSeek/Qwen route tests remain in all spending and raw records. Original and corrected grades are preserved; all 191 tool traces replayed. 64 local evaluation tests passed, including synthetic parity with the application time helper.
+
+Limits: small synthetic cases, correlated repeats, versioned contract/grader corrections, hosted model/provider configurations, no blinded human ratings, no production integration or live fallback-cascade measurement. Source-grounded report cases are drafts without engineering approval. See README.md and the HTML comparison for full methodology and reproduction.
