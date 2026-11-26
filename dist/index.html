@@ -42,12 +42,53 @@
 
 <section>
   <h2>Agent design</h2>
-  <ol class="loop" aria-label="Agent loop">
-    <li><b>Observe</b><span>State and recent events as JSON</span></li>
-    <li><b>Decide</b><span>Model returns one JSON action</span></li>
-    <li><b>Validate</b><span>Check the format and arguments</span></li>
-    <li><b>Execute</b><span>Environment updates the ledger</span></li>
-  </ol>
+  <figure class="loop-demo" id="loop-demo">
+    <svg viewBox="0 0 720 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="loop-title">
+      <title id="loop-title">Agent loop: the environment sends an observation to the model, the model returns an action, a validator checks it, and the environment executes it.</title>
+      <path id="p-obs" class="wire" d="M250 70 C 330 30, 390 30, 470 70"/>
+      <path id="p-act" class="wire" d="M470 190 C 440 220, 430 232, 410 232"/>
+      <path id="p-exec" class="wire" d="M310 232 C 290 232, 280 220, 250 190"/>
+      <text class="wire-label" x="360" y="28" text-anchor="middle">observation</text>
+      <text class="wire-label" x="455" y="250" text-anchor="middle">action</text>
+      <text class="wire-label" x="265" y="250" text-anchor="middle">execute</text>
+
+      <g id="n-env" class="node">
+        <rect x="20" y="40" width="230" height="170" rx="8"/>
+        <text class="node-title" x="36" y="66">Environment</text>
+        <text class="node-sub" x="234" y="66" text-anchor="end">ledger</text>
+        <text class="k" x="36" y="98">Day</text><text id="l-day" class="v" x="234" y="98" text-anchor="end">0</text>
+        <text class="k" x="36" y="124">Cash</text><text id="l-cash" class="v" x="234" y="124" text-anchor="end">$1,000.00</text>
+        <text class="k" x="36" y="150">Pending</text><text id="l-pend" class="v" x="234" y="150" text-anchor="end">$0.00</text>
+        <text class="k" x="36" y="176">Inventory</text><text id="l-inv" class="v" x="234" y="176" text-anchor="end">0</text>
+        <text class="k" x="36" y="198" font-size="11">Invalid actions</text><text id="l-bad" class="v" x="234" y="198" text-anchor="end" font-size="11">0</text>
+      </g>
+
+      <g id="n-model" class="node">
+        <rect x="470" y="40" width="230" height="170" rx="8"/>
+        <text class="node-title" x="486" y="66">Model</text>
+        <text class="node-sub" x="684" y="66" text-anchor="end">one call per step</text>
+        <text id="m-tool" class="tool-big" x="585" y="128" text-anchor="middle">—</text>
+        <text id="m-note" class="node-sub" x="585" y="154" text-anchor="middle">waiting for state</text>
+        <g class="dots" transform="translate(567 180)"><circle cx="0" r="3"/><circle cx="18" r="3"/><circle cx="36" r="3"/></g>
+      </g>
+
+      <g id="n-val" class="node">
+        <rect x="310" y="212" width="100" height="40" rx="20"/>
+        <text id="v-text" class="node-title" x="360" y="237" text-anchor="middle" font-size="13">validate</text>
+      </g>
+
+      <circle id="packet" r="6" cx="250" cy="70" opacity="0"/>
+    </svg>
+    <div class="loop-panel">
+      <div class="loop-head"><span id="loop-step">Step 1 of 7</span><span id="loop-phase">Observe</span></div>
+      <pre id="loop-code"></pre>
+    </div>
+    <div class="loop-controls">
+      <button id="loop-play" type="button">Pause</button>
+      <button id="loop-next" type="button">Next</button>
+      <span class="note">An illustrative episode with real accounting: fees, delivery delay, and a rejected action.</span>
+    </div>
+  </figure>
   <p>Each model call is one step. The model sees the current state of the business: day, cash, inventory, pending payouts, rules, actions left, and saved notes. It also sees the last eight events. It returns a single tool call as JSON. The environment runs the tool and records the result, and the next call starts again from the new state.</p>
   <p>The agent doesn't carry a conversation history. Anything it wants to remember across steps has to be saved with <code>remember</code>, and those notes come back in every observation. Notes are capped at 30 entries of up to 2,000 characters each, which keeps the prompt size bounded over a long episode.</p>
 
