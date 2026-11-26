@@ -1,0 +1,41 @@
+name: WTA synthetic agentic pilot
+on:
+  push:
+    branches: ['codex/wta-agentic-pilot']
+    paths: ['wta-agentic/**', '.github/workflows/wta-agentic.yml']
+permissions:
+  contents: write
+concurrency:
+  group: paid-model-experiments
+  cancel-in-progress: false
+jobs:
+  bounded-pilot:
+    if: contains(github.event.head_commit.message, '[run-wta-pilot]') && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Test only generic synthetic harness, without credentials
+        run: node --test wta-agentic/test.mjs
+      - name: Permanently claim this one authorized $25 pilot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            -f ref=refs/tags/wta-agentic-usd25-v1 -f sha="$GITHUB_SHA" >/dev/null
+      - name: Run one coordinator with cumulative staged budget
+        env:
+          CARDSHOPBENCH_API_KEY: ${{ secrets.CARDSHOPBENCH_API_KEY }}
+          WTA_PILOT_CLAIM: wta-agentic-usd25-v1
+        run: node wta-agentic/run.mjs live runs/wta-agentic
+      - name: Preserve synthetic traces and spend ledger
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wta-agentic-${{ github.run_id }}
+          path: runs/wta-agentic/
+          retention-days: 30
+          if-no-files-found: warn
