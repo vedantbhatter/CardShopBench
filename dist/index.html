@@ -23,9 +23,15 @@
 </header>
 
 <section>
+  <h2>Why I built this</h2>
+  <p>I buy and resell Pokémon cards and follow the market the way some people follow stocks. Finding a cheap card is the easy part. The hard part is everything after it: knowing what a card is actually worth, pricing it so it sells, not tying up all your cash in inventory, and timing purchases so you aren't stuck holding cards when you need money.</p>
+  <p>An AI agent would have to make the same calls, whether it runs a shop on its own or assists a human reseller. CardShopBench is my way of measuring how well current models make them in a controlled setting, before anyone trusts one with real money.</p>
+</section>
+
+<section>
   <h2>Summary</h2>
   <p>I built a simulated Pokémon card shop. An agent starts with $1,000 and has 14 days to buy cards, list them for sale, and sell them, while paying fees and shipping and waiting for deliveries and payouts. Starting prices come from 75 real market references. Everything after day 0 is simulated.</p>
-  <p>Four models ran two episodes each. All four made money in the simulation, averaging $109 to $120 profit, and all beat a simple rule-based buyer ($17). Two episodes per model is too few to rank them.</p>
+  <p>Four models ran two episodes each. All four made money in the simulation, averaging $109 to $120 profit, and all beat a simple rule-based buyer ($17). All four used almost the same pricing strategy. The real differences were in how many cards they bought, when they stopped buying, and how reliably they followed the output format. Two episodes per model is too few to rank them.</p>
 </section>
 
 <section>
@@ -151,13 +157,41 @@ The environment computes outcomes. Follow tool errors and keep within the action
   </div>
   <p class="note">API cost is the total for both episodes. The rule-based strategies use the same snapshot, seeds, horizon, and action budget, but read scenario prices directly instead of going through the tools.</p>
 
-  <h3>Observations</h3>
-  <ul>
-    <li>Every model beat the margin buyer on both seeds.</li>
-    <li>Claude and Qwen sold everything they bought. GPT and Gemini still held inventory at the end, so part of their profit is an estimate.</li>
-    <li>Invalid actions over two episodes: GPT 0, Gemini 0, Qwen 1, Claude 13.</li>
-    <li>Qwen cost $0.25 for both episodes, compared with $1.79 to $3.12 for the others, and its results were similar.</li>
-  </ul>
+  <h3>Trading behavior</h3>
+  <p>Profit alone hides how each model made its money, so I broke each run down into the decisions behind it. Figures combine both seeds. Ratios are relative to the card's reference price on that day.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Model</th><th>Bought</th><th>Sold</th><th>Paid / ref</th><th>Listed / ref</th><th>Per sale</th><th>Last buy day</th><th>Invalid</th></tr></thead>
+    <tbody>
+      <tr><td>GPT</td><td>27</td><td>89%</td><td>71.8%</td><td>97.8%</td><td>$11.53</td><td>11, 10</td><td>0</td></tr>
+      <tr><td>Claude</td><td>18</td><td>100%</td><td>72.2%</td><td>98.5%</td><td>$12.78</td><td>8, 8</td><td>13</td></tr>
+      <tr><td>Gemini</td><td>25</td><td>88%</td><td>71.9%</td><td>97.0%</td><td>$11.64</td><td>11, 10</td><td>0</td></tr>
+      <tr><td>Qwen</td><td>15</td><td>100%</td><td>72.3%</td><td>97.3%</td><td>$14.83</td><td>9, 8</td><td>1</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Computed from the published traces with <code>scripts/analyze_traces.py</code>. The rule-based margin buyer bought only 2 and 4 cards because it keeps a $250 cash reserve and needs a 15% margin, which explains most of its gap to the models.</p>
+
+  <h3>Findings</h3>
+
+  <h4>1. The models found the same edge</h4>
+  <p>All four paid about 72% of reference and listed at 97–99%, which means buying the deepest discounts and pricing just under market so the card sells quickly. On seed 22, GPT and Gemini made the exact same 12 purchases on the same days. The strategy itself didn't separate the models. Volume and timing did.</p>
+
+  <h4>2. Knowing when to stop buying</h4>
+  <p>A card bought today takes two days to arrive, then needs time to sell and two more days for the payout to settle. Claude and Qwen worked this out and stopped buying by day 8 or 9, so they ended both runs entirely in cash.</p>
+  <blockquote>“With 2 days left, a new buy would arrive on day 14 and could not sell or settle in time, so it would only add costs.” <cite>Claude, day 12</cite></blockquote>
+  <p>GPT and Gemini kept buying until day 10 or 11. On seed 22, about $490 of their roughly $1,115 ending equity was unsold cards or payouts that hadn't settled. Their profit is the highest, but part of it is an estimate rather than cash.</p>
+  <blockquote>“That leaves room to list below the 7,543-cent reference when it arrives on day 13.” <cite>GPT, day 11, buying with three days left</cite></blockquote>
+
+  <h4>3. Claude's invalid actions were format errors, not bad decisions</h4>
+  <p>All 13 of Claude's invalid actions were output that didn't parse. Ten times it wrote a sentence of reasoning before the JSON, and three times it added an extra closing brace. The decisions inside were sensible. A more lenient parser would have recovered most of them, but I kept the parser strict so every model is held to the same output format, and each failure cost Claude one action. Qwen's single invalid action was a response that used up all 4,096 output tokens without producing an answer.</p>
+
+  <h4>4. Claude kept its own books</h4>
+  <p>On seed 22, Claude called <code>remember</code> 11 times to keep a running plan with each item's cost, listing price, and break-even. It derived the break-even formula correctly from the 13.25% fee and $4.50 shipping. No other model used memory at all.</p>
+  <blockquote>“Break-even = (cost+450)/0.8675.” <cite>Claude’s memory notes, from day 1 on</cite></blockquote>
+
+  <h4>5. Qwen looked prices up with the wrong tool</h4>
+  <p>Qwen called <code>research</code> 16 times, mostly searching for card IDs it already owned to find their reference prices. The research corpus was empty, so every call came back blank. <code>inspect_card</code> would have answered in one action. Even so, Qwen earned the highest profit per sale and cost about a twelfth as much as GPT ($0.25 vs. $3.12).</p>
 </section>
 
 <section>
@@ -205,6 +239,17 @@ The environment computes outcomes. Follow tool errors and keep within the action
     <li>Fees and delays are illustrative and don't match any specific marketplace.</li>
     <li>Card condition, grading, negotiation, returns, and counterfeits are not modeled.</li>
     <li>The research corpus was empty in these runs, so the <code>research</code> tool returned nothing.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Next steps</h2>
+  <ul>
+    <li><b>Consistency.</b> Run each model several times on the same seed and report how often it succeeds every time, not just its average.</li>
+    <li><b>Sellers who negotiate and lie.</b> Add LLM-played sellers who haggle, overstate a card's condition or grade, or push for off-platform payment.</li>
+    <li><b>Assistant mode.</b> Require owner approval above a spending limit, and measure whether the agent asks at the right moments.</li>
+    <li><b>Real research.</b> Fill the research corpus with dated forum and news posts, including some with planted instructions, and measure whether the evidence helps.</li>
+    <li><b>A profit ceiling.</b> Add a strategy that knows future prices, so results can be reported as a share of the best possible profit.</li>
   </ul>
 </section>
 
