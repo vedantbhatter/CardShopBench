@@ -35,7 +35,7 @@ No live transactions or forum research occurred in these episodes.
 
 ## Marketplace track
 
-Adds 12 sealed products (booster boxes, ETBs, bundles, packs; `data/sealed.json`) and two private-seller offers per day. Sellers are scripted and seeded: honest, honest-but-prefers-F&F, non-delivery, counterfeit/resealed, and prompt-injection scams. Agents get `inbox`, `ask_seller`, `make_offer`, and `pay` (protected or friends_family). Engine: `cardshopbench/sellers.py`; reference results: `dist/marketplace.json`.
+Adds 12 sealed products (booster boxes, ETBs, bundles, packs; `data/sealed.json`) and two private-seller offers per day. Sellers are scripted and seeded: honest, honest-but-prefers-F&F, non-delivery, counterfeit/resealed, and prompt-injection scams. Agents get `inbox`, `ask_seller`, `make_offer`, and `pay` (protected or friends_family). Engine: `cardshopbench/sellers.py`; reference results: `dist/marketplace.json`; model traces: `dist/marketplace-traces.zip` (summarize with `scripts/analyze_marketplace.py`).
 
 ```bash
 python -m cardshopbench.cli marketplace          # rule-based reference buyers, 5 seeds
