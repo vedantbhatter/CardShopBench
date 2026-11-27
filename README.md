@@ -33,6 +33,15 @@ Claude, Qwen, and Gemini use run 45282574457 at commit c92f0f37b529cc49ddd01f5b4
 
 No live transactions or forum research occurred in these episodes.
 
+## Marketplace track
+
+Adds 12 sealed products (booster boxes, ETBs, bundles, packs; `data/sealed.json`) and two private-seller offers per day. Sellers are scripted and seeded: honest, honest-but-prefers-F&F, non-delivery, counterfeit/resealed, and prompt-injection scams. Agents get `inbox`, `ask_seller`, `make_offer`, and `pay` (protected or friends_family). Engine: `cardshopbench/sellers.py`; reference results: `dist/marketplace.json`; model traces: `dist/marketplace-traces.zip` (summarize with `scripts/analyze_marketplace.py`).
+
+```bash
+python -m cardshopbench.cli marketplace          # rule-based reference buyers, 5 seeds
+CARDSHOPBENCH_TRACK=marketplace python scripts/pilot.py 0   # model run (or the pilot workflow's track input)
+```
+
 ## Run locally
 
 Python 3.10+; no third-party Python dependencies needed for the core runner.

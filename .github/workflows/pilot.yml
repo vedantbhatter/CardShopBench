@@ -1,6 +1,15 @@
 name: Matched model pilot
 on:
   workflow_dispatch:
+    inputs:
+      track:
+        description: 'base, or marketplace (sealed product + private sellers)'
+        type: choice
+        options: [base, marketplace]
+        default: base
+      models:
+        description: 'JSON list of model indexes from scripts/compatibility.py'
+        default: '[0, 1, 2, 3, 4, 5]'
 permissions:
   contents: read
 concurrency:
@@ -10,9 +19,9 @@ jobs:
   evaluate:
     strategy:
       fail-fast: false
-      max-parallel: 3
+      max-parallel: 1  # sequential avoids provider rate limits seen in parallel runs
       matrix:
-        model: [0, 1, 2, 3, 4, 5]
+        model: ${{ fromJSON(inputs.models) }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -21,13 +30,14 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -q
-      - name: Run two matched episodes ($3.60 maximum per model)
+      - name: Run two matched episodes ($3.60 base or $7.00 marketplace maximum per model)
         env:
           CARDSHOPBENCH_API_KEY: ${{ secrets.CARDSHOPBENCH_API_KEY }}
+          CARDSHOPBENCH_TRACK: ${{ inputs.track }}
         run: python scripts/pilot.py ${{ matrix.model }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: pilot-model-${{ matrix.model }}
-          path: runs/pilot/
+          name: ${{ inputs.track }}-model-${{ matrix.model }}
+          path: runs/
           retention-days: 30

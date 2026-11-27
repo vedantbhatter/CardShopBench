@@ -1,48 +1,154 @@
 'use strict';
-const $=s=>document.querySelector(s), names={margin:'Margin buyer',momentum:'Hype chaser',cash:'Cash hold'},colors={margin:'#327252',momentum:'#c47842',cash:'#98a59e'};
-const money=c=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(c/100);
-const precise=c=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(c/100);
-const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let data,visible=12,timer;
-function selection(){return {scenario:$('#scenario').value,regime:$('#regime').value};}
-function selectedRuns(){const s=selection();return data.runs.filter(r=>r.config.scenario===s.scenario&&r.config.regime===s.regime);}
-function renderResults(){
- const runs=selectedRuns(),s=selection();
- const rows=data.aggregates.filter(r=>r.scenario===s.scenario&&r.regime===s.regime).sort((a,b)=>b.mean_profit_cents-a.mean_profit_cents);
- $('#leaderboard').innerHTML=rows.map(r=>`<tr><td><i style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${colors[r.agent]};margin-right:9px"></i>${names[r.agent]}</td><td class="${r.mean_profit_cents>=0?'positive':'negative'}">${precise(r.mean_profit_cents)}</td><td>${money(r.bootstrap_ci_cents[0])} to ${money(r.bootstrap_ci_cents[1])}</td><td>${(r.mean_sell_through*100).toFixed(1)}%</td><td>${(r.mean_drawdown*100).toFixed(1)}%</td></tr>`).join('');
- const series=Object.keys(names).map(agent=>({agent,values:Array.from({length:31},(_,day)=>{const rr=runs.filter(r=>r.agent===agent);return rr.reduce((t,r)=>t+r.history[day].equity_cents,0)/rr.length;})}));
- const all=series.flatMap(s=>s.values),low=Math.floor((Math.min(...all)-5000)/10000)*10000,high=Math.ceil((Math.max(...all)+5000)/10000)*10000;
- const x=d=>72+d/30*950,y=v=>270-(v-low)/(high-low)*235;
- let svg=`<svg viewBox="0 0 1060 315" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mean equity trajectories for three baseline strategies"><title>Mean business equity across five paired seeds</title>`;
- for(let i=0;i<5;i++){const value=low+(high-low)*i/4,py=y(value);svg+=`<line x1="72" y1="${py}" x2="1022" y2="${py}" stroke="#e8ede5"/><text x="60" y="${py+4}" text-anchor="end" fill="#6c7a70" font-size="12">${money(value)}</text>`;}
- for(let d=0;d<=30;d+=5)svg+=`<text x="${x(d)}" y="298" text-anchor="middle" fill="#6c7a70" font-size="12">${d===0?'Day 0':d}</text>`;
- for(const line of series){svg+=`<polyline points="${line.values.map((v,d)=>`${x(d)},${y(v)}`).join(' ')}" fill="none" stroke="${colors[line.agent]}" stroke-width="${line.agent==='cash'?2:3}" ${line.agent==='cash'?'stroke-dasharray="5 5"':''}/>`;svg+=`<circle cx="${x(30)}" cy="${y(line.values[30])}" r="4" fill="${colors[line.agent]}"/>`;}
- $('#chart').innerHTML=svg+'</svg>';
- const best=rows[0];$('#finding').innerHTML=`<strong>What this run configuration shows</strong>${names[best.agent]} ends with the highest mean equity under ${escape(s.regime)} execution assumptions: ${precise(100000+best.mean_profit_cents)}. Change the scenario or execution regime to see whether the comparison holds. This is a simulator finding, not evidence of real-world returns.`;
- renderReplay();
+const $ = s => document.querySelector(s);
+const names = {margin: 'Margin buyer', momentum: 'Hype chaser', cash: 'Cash hold'};
+const color = k => getComputedStyle(document.documentElement).getPropertyValue('--' + k).trim();
+const money = c => new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', maximumFractionDigits: 0}).format(c / 100);
+const precise = c => new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(c / 100);
+let data;
+
+function render() {
+  const scenario = $('#scenario').value, regime = $('#regime').value;
+  const runs = data.runs.filter(r => r.config.scenario === scenario && r.config.regime === regime);
+  const rows = data.aggregates
+    .filter(r => r.scenario === scenario && r.regime === regime)
+    .sort((a, b) => b.mean_profit_cents - a.mean_profit_cents);
+
+  $('#leaderboard').innerHTML = rows.map(r => `<tr>
+    <td>${names[r.agent]}</td>
+    <td class="${r.mean_profit_cents >= 0 ? 'positive' : 'negative'}">${precise(r.mean_profit_cents)}</td>
+    <td>${money(r.bootstrap_ci_cents[0])} to ${money(r.bootstrap_ci_cents[1])}</td>
+    <td>${(r.mean_sell_through * 100).toFixed(1)}%</td>
+    <td>${(r.mean_drawdown * 100).toFixed(1)}%</td></tr>`).join('');
+
+  const days = runs[0].history.length - 1;
+  const series = Object.keys(names).map(agent => {
+    const rr = runs.filter(r => r.agent === agent);
+    return {agent, values: Array.from({length: days + 1}, (_, d) => rr.reduce((t, r) => t + r.history[d].equity_cents, 0) / rr.length)};
+  });
+  const all = series.flatMap(s => s.values);
+  const low = Math.floor((Math.min(...all) - 5000) / 10000) * 10000;
+  const high = Math.ceil((Math.max(...all) + 5000) / 10000) * 10000;
+  const W = 720, H = 300, L = 64, R = 12, T = 10, B = 30;
+  const x = d => L + d / days * (W - L - R), y = v => H - B - (v - low) / (high - low) * (H - T - B);
+  const muted = color('muted'), line = color('line');
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  for (let i = 0; i <= 4; i++) {
+    const v = low + (high - low) * i / 4;
+    svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${line}"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" fill="${muted}" font-size="12">${money(v)}</text>`;
+  }
+  for (let d = 0; d <= days; d += 5) svg += `<text x="${x(d)}" y="${H - 8}" text-anchor="middle" fill="${muted}" font-size="12">${d === 0 ? 'Day 0' : d}</text>`;
+  for (const s of series) {
+    svg += `<polyline fill="none" stroke="${color(s.agent)}" stroke-width="2.5" ${s.agent === 'cash' ? 'stroke-dasharray="5 5"' : ''} points="${s.values.map((v, d) => `${x(d)},${y(v)}`).join(' ')}"/>`;
+  }
+  $('#chart').innerHTML = svg + '</svg>';
 }
-function renderReplay(){
- const run=selectedRuns().find(r=>r.agent===$('#replay-agent').value&&r.config.seed===Number($('#seed').value));
- const day=Number($('#day').value),row=run.history[day];$('#day-label').textContent=day;$('#equity').textContent=precise(row.equity_cents);
- $('#ledger-rows').innerHTML=[['Settled cash',precise(row.cash_cents)],['Pending settlements',precise(row.receivable_cents)],['Inventory liquidation',precise(row.inventory_liquidation_cents)],['Cards in inventory',row.units_owned]].map(([a,b])=>`<div class="ledger-row"><span>${a}</span><b>${b}</b></div>`).join('');
- // Day N balance is the start of day N. Show only earlier actions and day-N settlement events.
- const events=run.events.filter(e=>(e.day<day||(e.day===day&&e.kind==='settlement'))&&['purchase','sale','listing','invalid_action','forced_advance','settlement'].includes(e.kind));
- $('#event-count').textContent=`${events.length} events through day ${day}`;
- $('#events').innerHTML=events.length?events.slice().reverse().map(e=>{const card=data.snapshot.cards.find(c=>c.id===e.card_id);let title='',detail='';
- if(e.kind==='purchase'){title=`Bought ${card?.name||e.card_id}`;detail=`${precise(e.cost_cents)} landed cost · arrives day ${e.arrival_day}`;}
- if(e.kind==='sale'){title=`Sold ${card?.name||e.card_id}`;detail=`${precise(e.gross_cents)} gross · ${precise(e.net_cents)} net · ${precise(e.profit_cents)} realized margin`;}
- if(e.kind==='listing'){title=`Listed inventory ${e.item_id}`;detail=`Asking ${precise(e.price_cents)}`;}
- if(e.kind==='settlement'){title='Sale proceeds settled';detail=`${precise(e.cents)} available to spend`;}
- if(e.kind==='invalid_action'){title='Action rejected';detail=e.error;}
- if(e.kind==='forced_advance'){title='Daily action limit reached';detail=e.reason;}
- return `<div class="event"><span class="event-tag">D${e.day} / ${e.kind==='purchase'?'BUY':escape(e.kind.toUpperCase())}</span><div>${escape(title)}<p>${escape(detail)}</p></div></div>`;}).join(''):'<p class="empty">No transactions yet. Advance the day to follow this strategy.</p>';
-}
-function renderCards(){const q=$('#card-search').value.toLowerCase(),cards=data.snapshot.cards.filter(c=>(c.name+' '+c.set+' '+c.era).toLowerCase().includes(q));$('#cards').innerHTML=cards.slice(0,visible).map(c=>`<a class="market-card" href="${escape(c.source_url)}" target="_blank" rel="noopener"><img src="${escape(c.image_url||'icon.svg')}" alt="${escape(c.name)}" loading="lazy"><h3>${escape(c.name)}</h3><p>${escape(c.set)} · ${escape(c.variant)}</p><strong>${precise(c.reference_cents)}</strong><small>Aggregate reference · ${escape(c.era)}</small></a>`).join('')||'<p>No matching cards.</p>';$('#more-cards').hidden=visible>=cards.length;}
-async function init(){try{const res=await fetch('results.json');if(!res.ok)throw Error('Results unavailable');data=await res.json();$('#card-count').textContent=data.snapshot.cards.length;$('#run-count').textContent=data.runs.length;$('#snapshot-date').textContent='Snapshot observed '+new Date(data.snapshot.observed_at).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'});const hero=data.snapshot.cards.find(c=>c.name.includes('Pikachu'))||data.snapshot.cards[0];if($('#hero-card-image'))$('#hero-card-image').innerHTML=`<img src="${escape(hero.image_url)}" alt="${escape(hero.name)}">`;renderResults();renderCards();}catch(e){$('#chart').textContent='Could not load experiment data. Serve this site over HTTP or reload the page.';console.error(e);}}
-for(const id of ['scenario','regime'])$('#'+id).addEventListener('change',()=>{renderResults();});
-for(const id of ['replay-agent','seed'])$('#'+id).addEventListener('change',renderReplay);
-$('#day').addEventListener('input',renderReplay);
-$('#play').addEventListener('click',()=>{if(timer){clearInterval(timer);timer=null;$('#play').textContent='Play replay';return;}if(Number($('#day').value)>=30)$('#day').value=0;$('#play').textContent='Pause replay';timer=setInterval(()=>{$('#day').value=Number($('#day').value)+1;renderReplay();if(Number($('#day').value)>=30){clearInterval(timer);timer=null;$('#play').textContent='Play replay';}},600);});
-$('#card-search').addEventListener('input',()=>{visible=12;renderCards();});$('#more-cards').addEventListener('click',()=>{visible+=12;renderCards();});
-$('#copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#quickstart').textContent);$('#copy').textContent='Copied';}catch{$('#copy').textContent='Select text to copy';}});
-init();
+
+fetch('results.json')
+  .then(r => { if (!r.ok) throw Error('results.json unavailable'); return r.json(); })
+  .then(d => { data = d; render(); })
+  .catch(e => { $('#chart').textContent = 'Could not load results. Serve this folder over HTTP.'; console.error(e); });
+$('#scenario').addEventListener('change', render);
+$('#regime').addEventListener('change', render);
+
+// Agent loop animation: an illustrative episode run through the real fee and delay rules.
+(function loopDemo() {
+  const root = $('#loop-demo');
+  if (!root) return;
+  const usd = c => '$' + (c / 100).toLocaleString('en-US', {minimumFractionDigits: 2});
+  const steps = [
+    {tool: 'search_listings', args: {query: 'umbreon'}, why: 'Look for underpriced Umbreon listings.',
+     result: '[{"listing_id":"d0-s3","name":"Umbreon V (Alternate Full Art)","ask_cents":26800,"reference_cents":37503}]'},
+    {tool: 'buy', args: {listing_id: 'd0-s3'}, why: 'Ask is 71% of reference; margin clears fees.',
+     apply: s => { s.cash -= 26900; s.inv = 1; s.events.push('purchase d0-s3'); }, flash: ['l-cash', 'l-inv'],
+     result: '{"item_id":"d0-s3","cost_cents":26900,"arrival_day":2}'},
+    {tool: 'list_item', args: {item_id: 'd0-s3', price_cents: 36900}, why: 'List just under reference.',
+     error: 'Item not owned or still in transit', apply: s => { s.bad += 1; s.events.push('invalid_action'); }, flash: ['l-bad']},
+    {tool: 'remember', args: {key: 'plan', value: 'List d0-s3 at $369 once it arrives (day 2).'}, why: 'Save the plan for later steps.',
+     apply: s => { s.memory = {plan: 'List d0-s3 at $369 once it arrives (day 2).'}; }, result: '{"saved":"plan"}'},
+    {tool: 'end_day', args: {}, why: 'Nothing else to do until delivery.',
+     apply: s => { s.day = 1; s.events.push('day 1'); }, flash: ['l-day'], result: '{"day":1}'},
+    {tool: 'end_day', args: {}, why: 'Still in transit.',
+     apply: s => { s.day = 2; s.events.push('day 2'); }, flash: ['l-day'], result: '{"day":2}'},
+    {tool: 'list_item', args: {item_id: 'd0-s3', price_cents: 36900}, why: 'Card has arrived; follow the saved plan.',
+     apply: s => { s.events.push('listing d0-s3'); }, result: '{"listed":"d0-s3"}'},
+    {tool: 'end_day', args: {}, why: 'Let buyers see the listing.',
+     apply: s => { s.day = 3; s.inv = 0; s.pend = 31561; s.events.push('sale d0-s3'); }, flash: ['l-day', 'l-inv', 'l-pend'],
+     result: '{"day":3}  // sold for $369.00: −$48.89 fee, −$4.50 shipping → $315.61 net, settles day 4'}
+  ];
+  const phases = ['Observe', 'Decide', 'Validate', 'Execute'];
+  const fresh = () => ({day: 0, cash: 100000, pend: 0, inv: 0, bad: 0, memory: {}, events: []});
+  let state = fresh(), step = 0, phase = 0, timer = null, playing = true, touched = false;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = s => String(s).replace(/[&<>]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c]));
+
+  function ledger(flash = []) {
+    $('#l-day').textContent = state.day;
+    $('#l-cash').textContent = usd(state.cash);
+    $('#l-pend').textContent = usd(state.pend);
+    $('#l-inv').textContent = state.inv;
+    $('#l-bad').textContent = state.bad;
+    for (const id of flash) { const el = document.getElementById(id); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 900); }
+  }
+  function on(ids) {
+    root.querySelectorAll('.on').forEach(el => el.classList.remove('on'));
+    for (const id of ids) document.getElementById(id).classList.add('on');
+  }
+  function travel(pathId) {
+    const path = document.getElementById(pathId), dot = $('#packet'), len = path.getTotalLength();
+    if (reduce) { dot.setAttribute('opacity', 0); return; }
+    const t0 = performance.now(), dur = 700;
+    dot.setAttribute('opacity', 1);
+    (function frame(now) {
+      const t = Math.min(1, (now - t0) / dur), p = path.getPointAtLength(len * (1 - Math.pow(1 - t, 2)));
+      dot.setAttribute('cx', p.x); dot.setAttribute('cy', p.y);
+      if (t < 1) requestAnimationFrame(frame); else dot.setAttribute('opacity', 0);
+    })(t0);
+  }
+  function render() {
+    const s = steps[step], model = $('#n-model'), val = $('#n-val');
+    $('#loop-step').textContent = `Step ${step + 1} of ${steps.length}`;
+    $('#loop-phase').textContent = phases[phase];
+    model.classList.remove('thinking');
+    if (phase === 0) {
+      val.classList.remove('ok', 'bad'); $('#v-text').textContent = 'validate';
+      $('#m-tool').textContent = '—'; $('#m-note').textContent = 'reading state';
+      on(['n-env', 'p-obs']); travel('p-obs');
+      const obs = {day: state.day, cash_cents: state.cash, pending_cents: state.pend, inventory: state.inv,
+        actions_remaining: [6, 5, 4, 3, 2, 6, 6, 5][step], memory: state.memory,
+        recent_events: state.events.slice(-3)};
+      $('#loop-code').innerHTML = esc(JSON.stringify(obs));
+    } else if (phase === 1) {
+      on(['n-model']); model.classList.add('thinking');
+      $('#m-tool').textContent = s.tool + '()'; $('#m-note').textContent = 'returns one JSON action';
+      $('#loop-code').innerHTML = esc(JSON.stringify({tool: s.tool, args: s.args, rationale: s.why}));
+    } else if (phase === 2) {
+      on(['n-val', 'p-act']); travel('p-act');
+      val.classList.add(s.error ? 'bad' : 'ok'); $('#v-text').textContent = s.error ? '✗ rejected' : '✓ valid';
+      $('#loop-code').innerHTML = s.error
+        ? `<span class="err">✗ ${esc(s.error)}</span>\nThe action still uses one of the day's 6 actions and is logged as invalid.`
+        : `<span class="ok">✓ valid JSON · known tool · arguments type-checked</span>`;
+    } else {
+      on(['n-env', 'p-exec']); travel('p-exec');
+      if (s.apply) s.apply(state);
+      ledger(s.flash || []);
+      $('#loop-code').innerHTML = s.error ? `<span class="err">{"error":"${esc(s.error)}"}</span>  // returned to the model next step` : esc(s.result);
+    }
+  }
+  function advance() {
+    phase++;
+    if (phase > 3) { phase = 0; step++; }
+    if (step >= steps.length) { step = 0; state = fresh(); ledger(); }
+    render();
+  }
+  function play(v) {
+    playing = v; $('#loop-play').textContent = v ? 'Pause' : 'Play';
+    clearInterval(timer); timer = v ? setInterval(advance, 1500) : null;
+  }
+  $('#loop-play').addEventListener('click', () => { touched = true; play(!playing); });
+  $('#loop-next').addEventListener('click', () => { touched = true; play(false); advance(); });
+  ledger(); render();
+  // Start when scrolled into view so the reader sees step 1.
+  if (reduce) { play(false); return; }
+  play(false);
+  new IntersectionObserver((entries, obs) => { if (entries[0].isIntersecting) { if (!touched) play(true); obs.disconnect(); } }, {threshold: .4}).observe(root);
+})();
